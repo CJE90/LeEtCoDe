@@ -1,3 +1,4 @@
+[Discussion Post (created on 28/2/2021 at 12:6)](https://leetcode.com/problems/longest-substring-with-at-most-k-distinct-characters/submissions/)  
 <h2>340. Longest Substring with At Most K Distinct Characters</h2><h3>Medium</h3><hr><div><p>Given a string <code>s</code> and an integer <code>k</code>, return <em>the length of the longest substring of</em> <code>s</code>&nbsp;<em>that contains at most</em> <code>k</code> <em><strong>distinct</strong> characters</em>.</p>
 
 <p>&nbsp;</p>
