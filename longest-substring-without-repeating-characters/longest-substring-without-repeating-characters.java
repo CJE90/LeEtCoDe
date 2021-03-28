@@ -1,32 +1,23 @@
 class Solution {
-    public int lengthOfLongestSubstring(String s) {
-        Set<Character> hs = new HashSet<>();
-        int maxWindowSize = Integer.MIN_VALUE;
-        int windowStart = 0;
-        
-        if(s.length() == 0){
+    public int lengthOfLongestSubstring(String s) {//only needs a for and a while
+        if(s == null || s.length() == 0){
             return 0;
         }
         
-        for(int windowEnd = 0; windowEnd < s.length(); windowEnd++){
-            if(!hs.contains(s.charAt(windowEnd))){
-                hs.add(s.charAt(windowEnd));
-                maxWindowSize = Math.max(maxWindowSize, windowEnd-windowStart+1);      
-            }
-            else{
-                while(hs.contains(s.charAt(windowEnd))){
-                    if(s.charAt(windowStart) != s.charAt(windowEnd)){
-                        hs.remove(s.charAt(windowStart));
-                        windowStart++;
-                    }
-                    else{
-                        windowStart++;
-                        break;
-                    }
-                }
+        Set<Character> hs = new HashSet<>();
+        int maxWindow = -1;
+        
+        int left = 0;
+        
+        for(int right = 0; right<s.length(); right++){
+            char c = s.charAt(right);
+            while(hs.contains(s.charAt(right))){
+                hs.remove(s.charAt(left++));
             }
             
+            hs.add(s.charAt(right));
+            maxWindow = Math.max(maxWindow, right-left+1);
         }
-        return maxWindowSize;
+        return maxWindow;
     }
 }
