@@ -5,7 +5,7 @@ class Solution {
         }
         List<Integer> pair = new ArrayList<>();
         StringBuilder str = new StringBuilder();
-        int minWindowSize = Integer.MAX_VALUE;
+        
         pair.add(0);
         pair.add(s.length());
         Map<Character,Integer> hm = new HashMap<>();
