@@ -2,33 +2,42 @@ class Solution {
     public List<Integer> findAnagrams(String s, String p) {
         
         Map<Character, Integer> hm = new HashMap<>();
-        Map<Character, Integer> compare = new HashMap<>();
+        
         List<Integer> ans = new LinkedList<>();
         for(Character c:p.toCharArray()){
             hm.put(c, hm.getOrDefault(c,0)+1);
         }
         
         int len = p.length();
+        int count = 0;
         
-        int start = 0;
-        for(int end = 0; end<s.length();end++){
-            compare.put(s.charAt(end), compare.getOrDefault(s.charAt(end),0)+1);
-            
-            while(end-start+1 == len){
-                if(compare.equals(hm)){
-                    ans.add(start);
+        int left = 0;
+        int right = 0;
+        while(right<s.length()){
+            if(hm.containsKey(s.charAt(right))){
+                if(hm.get(s.charAt(right)) > 0){
+                    count++;
                 }
-                if(compare.get(s.charAt(start)) == 1){
-                    compare.remove(s.charAt(start));
-                }
-                else{
-                    compare.put(s.charAt(start), compare.get(s.charAt(start))-1);
-                }
-                start++;
-                
+                hm.put(s.charAt(right), hm.get(s.charAt(right))-1);
             }
+            while(right-left+1 > len){
+                if(hm.containsKey(s.charAt(left))){
+                    hm.put(s.charAt(left), hm.get(s.charAt(left))+1);
+                    if(hm.get(s.charAt(left)) > 0){
+                        count--;
+                    }
+                }
+                left++;
+            }
+            if(count == len){
+                ans.add(left);
+            }
+            right++;
         }
+        
+        
         return ans;
+        
         
     }
 }
