@@ -3,18 +3,15 @@ class Solution {
         
         double maxAverage = Integer.MIN_VALUE;
         int left = 0;
-        int right = 0;
-        double currSum = 0;
+        double curSum = 0;
         
-        while(left<=right && right<nums.length){
-            currSum += nums[right];
-            
-            while(right-left+1 == k){
-                maxAverage = Math.max(maxAverage, currSum/k);
-                currSum -= nums[left];
-                left++;
-            }
-            right++;
+        for(int right = 0; right < nums.length; right++){
+            curSum += nums[right];
+             while(right - left + 1 >= k){
+                 maxAverage = Math.max(maxAverage, (curSum / k));
+                 curSum -= nums[left];
+                 left++;
+             }
         }
         return maxAverage;
         
