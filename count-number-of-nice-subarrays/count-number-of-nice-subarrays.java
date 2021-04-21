@@ -1,29 +1,32 @@
 class Solution {
     public int numberOfSubarrays(int[] nums, int k) {
-        int finalCount = 0;
-        int countOfNiceSubArrays = 0;
-        int countOfOddNumbers = 0;
+       return atMost(nums, k) - atMost(nums,k-1);
+    }
+    
+    
+    public int atMost(int[] nums, int k){
+        int result = 0;
         int left = 0;
         
         for(int right = 0; right < nums.length; right++){
-            if(nums[right] %2 != 0){
-                countOfOddNumbers++;
-                countOfNiceSubArrays = 0;
+            if(nums[right] % 2 == 1){
+                k--;
             }
             
-            
-            
-            while(countOfOddNumbers >= k){
-                countOfNiceSubArrays++;
-                if(nums[left] %2 != 0){
-                    countOfOddNumbers--;
+            while(k < 0){
+                if(nums[left] %2 == 1){
+                    k++;
                 }
-                
                 left++;
+                
             }
-            
-            finalCount+=countOfNiceSubArrays;
+            result += right-left+1;
         }
-        return finalCount;
+        return result;
     }
 }
+
+
+
+
+
