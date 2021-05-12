@@ -13,12 +13,11 @@ class Solution {
         if(head == null || head.next == null){
             return head;
         }
-        ListNode firstNode = head;
-        ListNode secondNode = head.next;
-        
-        firstNode.next = swapPairs(secondNode.next);
-        secondNode.next = firstNode;
-        return secondNode;
+        ListNode temp = head;
+        head = head.next;
+        temp.next= swapPairs(head.next);
+        head.next = temp;
+        return head;
         
     }
 }
