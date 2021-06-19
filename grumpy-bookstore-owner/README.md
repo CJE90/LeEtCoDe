@@ -26,3 +26,8 @@ The maximum number of customers that can be satisfied = 1 + 1 + 1 + 1 + 7 + 5 = 
 	<li><code>0 &lt;=&nbsp;grumpy[i] &lt;= 1</code></li>
 </ul>
 </div>
+
+
+We basically have two buckets here. nonGrumpy will be added to whenever the bookstore owner is not grumpy. These can be added regardless of when the non grumpy super power is used because we can add this back later. If the bookstore owner is grumpy we add that customer value to the other bucket. At the end of every iteration in the for loop, we calculate our maximum grumpy bucket size. When our window grows too large( i(right) is larger than minutes we can dynamically check what is at the left pointer with (i-minutes) if this value in grumpy is a 1 then we need to remove it from our bucket.
+
+At the end of our loop we add every value where the bookstore owner was not grumpy and the maximum value of when the bookstore owner was grumpy.
