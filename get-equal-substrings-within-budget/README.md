@@ -36,3 +36,7 @@
 	<li><code>s</code> and&nbsp;<code>t</code> only contain lower case English letters.</li>
 </ul>
 </div>
+
+*************************** My Comments ********************************
+
+Basic sliding window. The right pointer will be in charge of calculating the cost of making the change of characters at the [right] index. If the cost is ever greater than the max cost we will need to subtract the cost of whats at the left pointer and move the left pointer. At the end of every iteration we will check the length of the substring we have and store the max we find. We return this max at the end of the for loop.
