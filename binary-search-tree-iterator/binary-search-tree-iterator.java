@@ -15,37 +15,36 @@
  */
 class BSTIterator {
     Deque<TreeNode> stack;
+    TreeNode visited;
 
     public BSTIterator(TreeNode root) {
         stack = new ArrayDeque<>();
-        fillStack(root);
+        visited = root;
         
     }
     
     public int next() {
-        TreeNode curNode = stack.pop();
-        if(curNode.right != null){
-            fillStack(curNode.right);
+        while(visited != null){
+            stack.push(visited);
+            visited  = visited.left;
         }
-        return curNode.val;
+        TreeNode curr = stack.pop();
+        visited = curr.right;
+        return curr.val;
         
     }
     
     public boolean hasNext() {
-        if(!stack.isEmpty()){
+        if(visited != null || !stack.isEmpty()){
             return true;
         }
         return false;
         
         
     }
-    public void fillStack(TreeNode root){
-        while(root!= null){
-            stack.push(root);
-            root = root.left;
-        }
+    
     }
-}
+
 
 /**
  * Your BSTIterator object will be instantiated and called as such:
