@@ -14,28 +14,18 @@
  * }
  */
 class Solution {
+    int index = 0;
     public TreeNode bstFromPreorder(int[] preorder) {
-        if(preorder == null || preorder.length == 0){
+        return helper(preorder,Integer.MAX_VALUE);
+    }
+    public TreeNode helper(int[] preorder, int limit){
+        if(index>preorder.length-1 || preorder[index] > limit){
             return null;
         }
-        int preorder_root = preorder[0];
-        List<Integer> lower = new ArrayList<>();
-        List<Integer> upper = new ArrayList<>();
-        for(int i = 1; i<preorder.length;i++){
-            if(preorder[i]<preorder_root){
-                lower.add(preorder[i]);
-            }
-            else{
-                upper.add(preorder[i]);
-            }
-        }
-        
-        int[] lowerFixed = lower.stream().mapToInt(i->i).toArray();
-        int[] upperFixed = upper.stream().mapToInt(i->i).toArray();
-        
-        TreeNode root = new TreeNode(preorder_root);
-        root.left = bstFromPreorder(lowerFixed);
-        root.right = bstFromPreorder(upperFixed);
-        return root;
+        TreeNode newNode = new TreeNode(preorder[index]);
+        index++;
+        newNode.left = helper(preorder,newNode.val);
+        newNode.right = helper(preorder,limit);
+        return newNode;
     }
 }
