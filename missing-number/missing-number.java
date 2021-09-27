@@ -1,14 +1,11 @@
 class Solution {
     public int missingNumber(int[] nums) {
-        int countFull = 0;
-        int countHalf = 0;
-        
-        for(int i = 0; i<nums.length;i++){
-            countFull+=i;
-            countHalf+=nums[i];
+        Arrays.sort(nums);
+        for(int i = 0; i< nums.length; i++){
+            if(nums[i] != i){
+                return i;
+            }
         }
-        countFull+=nums.length;
-        return countFull-countHalf;
-        
+        return nums.length;
     }
 }
