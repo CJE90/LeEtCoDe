@@ -1,21 +1,32 @@
 class Solution {
     public int[] productExceptSelf(int[] nums) {
         int[] result = new int[nums.length];
-        int[] forward = new int[nums.length+1];
-        int[] backward = new int[nums.length+1];
-        forward[0] = 1;
-        backward[backward.length-1] = 1;
-         for(int i = 1; i< forward.length; i++){
-             forward[i] = nums[i-1]*forward[i-1];
-         }
-        for(int i = nums.length-1; i>=0; i--){
-            backward[i] = nums[i]*backward[i+1];
-        }
-        for(int i = 0; i< result.length; i++){
-            result[i] = forward[i]*backward[i+1];
-        }
         
+        result[0] = 1;
+        for(int i = 1; i<nums.length; i++){
+            result[i] = result[i-1] * nums[i-1];
+        }
+        int right =1;
+        for(int i = result.length-1; i>=0; i--){
+            result[i]*=right;
+            right*=nums[i];
+        }
         return result;
+//         int[] forward = new int[nums.length+1];
+//         int[] backward = new int[nums.length+1];
+//         forward[0] = 1;
+//         backward[backward.length-1] = 1;
+//          for(int i = 1; i< forward.length; i++){
+//              forward[i] = nums[i-1]*forward[i-1];
+//          }
+//         for(int i = nums.length-1; i>=0; i--){
+//             backward[i] = nums[i]*backward[i+1];
+//         }
+//         for(int i = 0; i< result.length; i++){
+//             result[i] = forward[i]*backward[i+1];
+//         }
+        
+//         return result;
     }
 }
 
