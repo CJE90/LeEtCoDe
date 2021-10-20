@@ -1,28 +1,22 @@
 class Solution {
     public int[] productExceptSelf(int[] nums) {
+        int[] result = new int[nums.length];
         int[] forward = new int[nums.length+1];
         int[] backward = new int[nums.length+1];
-        int[] result = new int[nums.length];
         forward[0] = 1;
         backward[backward.length-1] = 1;
-        int sum = 1;
-        for(int i = 0; i< nums.length; i++){
-            sum*=nums[i];
-            forward[i+1]= sum;
+         for(int i = 1; i< forward.length; i++){
+             forward[i] = nums[i-1]*forward[i-1];
+         }
+        for(int i = nums.length-1; i>=0; i--){
+            backward[i] = nums[i]*backward[i+1];
         }
-        sum = 1;
-        for(int i = backward.length-2;i>=0; i--){
-            sum*=nums[i];
-            backward[i] = sum;
-        }
-        
-        for(int i = 0; i<result.length; i++){
+        for(int i = 0; i< result.length; i++){
             result[i] = forward[i]*backward[i+1];
         }
         
         return result;
     }
-    
 }
 
 
@@ -30,7 +24,24 @@ class Solution {
 
 
 
+/*
 
-       //         4   5   1   8   2   10   6
-       //      1  4  20   20 160 320 3200 19200
-       //      19200 4800 960 960 120  60   6   1
+* 2 6 24        * 24 12 4
+1 * 3 12        1 *  12 4
+1 2 * 4         2 2  *  4
+1 2 6 *         6 6  3  * 1
+    
+    
+    
+    0  1  2  3  4
+    
+    1  1  2  6  24     (i-1)+(i)     
+      24 24 12  4  1    
+     
+       0  1  2  3  4     
+
+
+    
+    (0,1), (1,2), (2,3), (3, 4)
+    
+    */
