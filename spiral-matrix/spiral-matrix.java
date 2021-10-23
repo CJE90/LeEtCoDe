@@ -1,32 +1,34 @@
 class Solution {
     public List<Integer> spiralOrder(int[][] matrix) {
-        List<Integer> ans = new ArrayList<>();
-        int r = matrix.length;
-        int c = matrix[0].length;
-        int westBound = 0;
-        int eastBound = c-1;
-        int northBound = 0;
-        int southBound = r-1;
+        List<Integer> result = new ArrayList<>();
+        int startCol = 0, startRow = 0, endCol = matrix[0].length-1, endRow = matrix.length-1;
         
-        while(westBound<=eastBound && northBound<=southBound){
-            for(int col = westBound; col<=eastBound; col++){
-                ans.add(matrix[northBound][col]);
+        while(startCol<=endCol && startRow<=endRow){
+            //moving left to right
+            for(int i = startCol; i<=endCol; i++){
+                result.add(matrix[startRow][i]);
             }
-            northBound++;
-            for(int row = northBound; row<=southBound; row++){
-                ans.add(matrix[row][eastBound]);
+            startRow++;
+            //moving top to bottom
+            for(int i = startRow; i<=endRow; i++){
+                result.add(matrix[i][endCol]);
+            } 
+            endCol--;
+            //moving right to left
+            if(startRow<=endRow){
+                for(int i = endCol; i>=startCol; i--){
+                result.add(matrix[endRow][i]);
             }
-            eastBound--;
-            for(int col = eastBound; col>=westBound && northBound<=southBound; col--){
-                ans.add(matrix[southBound][col]);
+            endRow--;
             }
-            southBound--;
-            for(int row = southBound; row>=northBound && westBound<=eastBound; row--){
-                ans.add(matrix[row][westBound]);
+            
+            //moving bottom to top
+            if(startCol<=endCol){for(int i = endRow; i>=startRow; i--){
+                result.add(matrix[i][startCol]);
             }
-            westBound++;
+            startCol++;}
+            
         }
-        return ans;
-        
+        return result;  
     }
 }
