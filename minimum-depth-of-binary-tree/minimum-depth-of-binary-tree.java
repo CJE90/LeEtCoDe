@@ -21,24 +21,24 @@ class Solution {
         Queue<TreeNode> que = new LinkedList<>();
         int level = 1;
         
-        que.add(root);
-        while(que.size() != 0){
+        que.offer(root);
+        while(!que.isEmpty()){
             int n = que.size();
-            for(int i = 0; i<n; i++){
+            for(int i = 0; i < n; i++){
                 TreeNode cur = que.poll();
                 if(cur.left == null && cur.right == null){
-                return level;
-             }
+                    return level;
+                }
                 if(cur.left != null){
-                que.add(cur.left);
+                    que.offer(cur.left);
                 }
                 if(cur.right != null){
-                 que.add(cur.right);
+                    que.offer(cur.right);
                 }
             }
             level++;
-            
         }
         return 0;
+        
     }
 }
