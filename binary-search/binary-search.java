@@ -1,26 +1,20 @@
 class Solution {
     public int search(int[] nums, int target) {
-        int lo = 0; 
-        int hi = nums.length-1;
-        
-        Arrays.sort(nums);
+        int lo = 0; int hi = nums.length-1;
         
         while(lo<=hi){
             int mid = lo+(hi-lo)/2;
-            if(target == nums[mid]){
+            if(nums[mid] == target){
                 return mid;
             }
-            if(target<nums[mid]){
-                hi = mid-1;
-                
-            }
-            if(target>nums[mid]){
+            if(nums[mid] < target){
                 lo = mid+1;
-                
             }
-            
+            if(nums[mid] > target){
+                hi = mid-1;
+            }
         }
         return -1;
-        
     }
 }
+
