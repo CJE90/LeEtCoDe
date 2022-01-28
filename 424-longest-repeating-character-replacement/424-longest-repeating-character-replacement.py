@@ -5,10 +5,9 @@ class Solution:
         count = defaultdict(int)
         
         for r in range(len(s)):
-            largestCount = 0
+            
             count[s[r]]+=1
-            for val in count.values():
-                largestCount = max(largestCount, val)
+            largestCount = findMax(count)
             while (r-l+1) - largestCount > k:
                 count[s[l]] -= 1
                 if count[s[l]]<1:
@@ -16,6 +15,13 @@ class Solution:
                 l+=1
             longestFound = max(longestFound, r-l+1)
         return longestFound
+    
+def findMax(listOfVal) -> int:
+    largestFound = 0
+    for val in listOfVal.values():
+        largestFound = max(largestFound, val)
+    return largestFound
+        
             
             
     
