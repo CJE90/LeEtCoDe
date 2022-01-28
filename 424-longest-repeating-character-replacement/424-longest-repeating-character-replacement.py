@@ -7,8 +7,8 @@ class Solution:
         for r in range(len(s)):
             
             count[s[r]]+=1
-            largestCount = findMax(count)
-            while (r-l+1) - largestCount > k:
+            
+            while (r-l+1) - max(count.values()) > k:
                 count[s[l]] -= 1
                 if count[s[l]]<1:
                     count.pop(s[l])
@@ -16,11 +16,7 @@ class Solution:
             longestFound = max(longestFound, r-l+1)
         return longestFound
     
-def findMax(listOfVal) -> int:
-    largestFound = 0
-    for val in listOfVal.values():
-        largestFound = max(largestFound, val)
-    return largestFound
+
         
             
             
