@@ -1,14 +1,13 @@
 class Solution:
     def findAnagrams(self, s: str, p: str) -> List[int]:
         l = 0
-        ans = []
-        lookup  = Counter(p)
-        count = 0
-        
+        result = []
+        count  = 0
+        lookup = Counter(p)
         for r in range(len(s)):
             if s[r] in lookup:
                 if lookup[s[r]] > 0:
-                    count += 1
+                    count +=1
                 lookup[s[r]] -= 1
             
             while r-l+1 > len(p):
@@ -19,8 +18,6 @@ class Solution:
                 l+=1
             
             if count == len(p):
-                ans.append(l)
-        return ans
-                
-        
+                result.append(l)
+        return result
         
