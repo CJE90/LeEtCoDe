@@ -1,16 +1,18 @@
 class Solution:
     def numberOfSubstrings(self, s: str) -> int:
-        startWindow = 0
+        l = 0
         count = 0 
-        d = {'a':0,'b':0,'c':0}
+        d = defaultdict(int)
 
-        for endWindow in range(len(s)):
-            d[s[endWindow]]+=1
+        for r in range(len(s)):
+            d[s[r]]+=1
 
-            while  all(d.values()):
-                count += len(s)-endWindow
-                d[s[startWindow]] -= 1
-                startWindow += 1
+            while len(d) == 3:
+                count += len(s)-r
+                d[s[l]] -= 1
+                if d[s[l]] < 1:
+                    d.pop(s[l])
+                l += 1
       
         return count
             
