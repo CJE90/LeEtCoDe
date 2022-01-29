@@ -17,7 +17,6 @@ class Solution:
                 if seen[s[l]] < 1:
                     seen.pop(s[l])
                 l+=1
-                mostFrequent = max(seen.values())
             longestFound = max(longestFound, r-l+1)
         return longestFound
             
