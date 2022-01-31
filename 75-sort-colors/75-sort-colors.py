@@ -3,24 +3,16 @@ class Solution:
         """
         Do not return anything, modify nums in-place instead.
         """
-        zeroCount = oneCount = twoCount = 0
-        for n in nums:
-            if n == 0:
-                zeroCount +=1
-            elif n == 1:
-                oneCount += 1
+        red, white, blue = 0, 0, len(nums)-1
+    
+        while white <= blue:
+            if nums[white] == 0:
+                nums[red], nums[white] = nums[white], nums[red]
+                white += 1
+                red += 1
+            elif nums[white] == 1:
+                white += 1
             else:
-                twoCount += 1
-        for i in range(len(nums)):
-            if zeroCount > 0:
-                nums[i] = 0
-                zeroCount -=1
-            elif oneCount > 0:
-                nums[i] = 1
-                oneCount -= 1
-            else:
-                nums[i] = 2
-                twoCount -=1
-                
-                
+                nums[white], nums[blue] = nums[blue], nums[white]
+                blue -= 1
         
