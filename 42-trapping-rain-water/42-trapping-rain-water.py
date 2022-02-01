@@ -12,7 +12,7 @@ class Solution:
         maxleft = 0
         maxright = 0
         rightStack = []
-        mins = []
+        #mins = []
         tw = 0
         
         for i in range(len(height)):
@@ -23,12 +23,13 @@ class Solution:
             maxright = max(maxright, height[j])
         rightStack.reverse()
         
-        for i in range(len(height)):
-            mins.append(min(leftStack[i], rightStack[i]))
+#         for i in range(len(height)):
+#             mins.append(min(leftStack[i], rightStack[i]))
         
         for i in range(len(height)):
-            if mins[i] - height[i] >= 0:
-                tw += mins[i] - height[i]
+            a = min(leftStack[i],rightStack[i])
+            if a - height[i] >= 0:
+                tw += a - height[i]
         return tw
                 
             
