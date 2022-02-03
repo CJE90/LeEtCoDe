@@ -7,7 +7,8 @@ class SparseVector:
     def dotProduct(self, vec: 'SparseVector') -> int:
         result = 0
         for num1, num2 in zip(self.array, vec.array):
-            result += num1*num2
+            if num1 != 0 or num2 != 0:
+                result += num1 * num2
         return result
         
 
