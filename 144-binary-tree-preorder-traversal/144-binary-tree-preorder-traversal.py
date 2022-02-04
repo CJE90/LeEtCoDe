@@ -15,8 +15,8 @@ class Solution:
             node = stack.pop()
             if node != None:
                 res.append(node.val)
-                if node.right != None:
+                if node.right:
                     stack.append(node.right)
-                if node.left != None:
+                if node.left:
                     stack.append(node.left)
         return res
