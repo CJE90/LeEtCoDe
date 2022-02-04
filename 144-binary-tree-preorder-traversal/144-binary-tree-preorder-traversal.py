@@ -11,10 +11,12 @@ class Solution:
         
         stack.append(root)
         
-        while stack:
+        while len(stack) > 0:
             node = stack.pop()
-            if node:
+            if node != None:
                 res.append(node.val)
-                stack.append(node.right)
-                stack.append(node.left)
+                if node.right != None:
+                    stack.append(node.right)
+                if node.left != None:
+                    stack.append(node.left)
         return res
