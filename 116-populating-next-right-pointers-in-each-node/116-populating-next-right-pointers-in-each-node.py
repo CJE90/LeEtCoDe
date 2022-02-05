@@ -12,23 +12,14 @@ class Solution:
     def connect(self, root: 'Optional[Node]') -> 'Optional[Node]':
         if not root:
             return None
-        que = []
-        
-        que.append(root)
-        
-        while len(que) > 0:
-            n = len(que)
-            for i in range(n):
-                node = que.pop(0)
-                if i == n-1:
-                    node.next = None
-                else:
-                    node.next = que[0]
-                if node.left:
-                    que.append(node.left)
-                if node.right:
-                    que.append(node.right)
+        leftmost = root
+        while leftmost.left:
+            head = leftmost
+            while head:
+                head.left.next = head.right
+                if head.next:
+                    head.right.next = head.next.left
+                head = head.next
+            leftmost = leftmost.left
         return root
-            
-            
         
