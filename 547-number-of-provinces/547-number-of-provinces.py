@@ -7,9 +7,10 @@ class Solution:
                 for j in range(i+1,len(city)):
                     if city[i] == 1 and city[j] == 1:
                         Uf.union(i, j)
-        print(Uf.root)                
-        #return len(Counter(Uf.root))
-        return len(set([Uf.find(i) for i in range(len(isConnected))]))
+        a = set()
+        for i in range(len(isConnected)):
+            a.add(Uf.find(i))
+        return len(a)
             
            
         
