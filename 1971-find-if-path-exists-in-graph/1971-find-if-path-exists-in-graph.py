@@ -1,22 +1,23 @@
 class Solution:
-    def validPath(self, n: int, edges: List[List[int]], start: int, end: int) -> bool:
-        neighbors = defaultdict(list)
-        for n1, n2 in edges:
-            neighbors[n1].append(n2)
-            neighbors[n2].append(n1)
-            
-        def dfs(node, end, seen):
-            if node == end:
-                return True
-            if node in seen:
-                return False
-            
-            seen.add(node)
-            for n in neighbors[node]:
-                if dfs(n, end, seen):
-                    return True
-                
-            return False
+    def validPath(self, n: int, edges: List[List[int]], source: int, destination: int) -> bool:
+        adjList = [[] for _ in range(n)]
+        for a,b in edges:
+            adjList[a].append(b)
+            adjList[b].append(a)
+       
+    
+        stack = [source]
+        visited = set()
         
-        seen = set()    
-        return dfs(start, end, seen)
+        while stack:
+            node = stack.pop()
+            if node == destination:
+                return True
+            if node not in visited:
+                visited.add(node)
+                for i in range(len(adjList[node])):
+                    stack.append(adjList[node][i])
+            else:
+                continue
+        return False
+            
