@@ -1,4 +1,4 @@
-<h2>133. Clone Graph</h2><h3>Medium</h3><hr><div><p>Given a reference of a node in a <strong><a href="https://en.wikipedia.org/wiki/Connectivity_(graph_theory)#Connected_graph" target="_blank">connected</a></strong> undirected graph.</p>
+<h2>  Clone Graph</h2><hr><div><p>Given a reference of a node in a <strong><a href="https://en.wikipedia.org/wiki/Connectivity_(graph_theory)#Connected_graph" target="_blank">connected</a></strong> undirected graph.</p>
 
 <p>Return a <a href="https://en.wikipedia.org/wiki/Object_copying#Deep_copy" target="_blank"><strong>deep copy</strong></a> (clone) of the graph.</p>
 
@@ -22,7 +22,7 @@
 
 <p>&nbsp;</p>
 <p><strong>Example 1:</strong></p>
-<img alt="" src="https://assets.leetcode.com/uploads/2019/11/04/133_clone_graph_question.png" style="width: 500px; height: 550px;">
+<img alt="" src="https://assets.leetcode.com/uploads/2019/11/04/133_clone_graph_question.png" style="width: 454px; height: 500px;">
 <pre><strong>Input:</strong> adjList = [[2,4],[1,3],[2,4],[1,3]]
 <strong>Output:</strong> [[2,4],[1,3],[2,4],[1,3]]
 <strong>Explanation:</strong> There are 4 nodes in the graph.
@@ -44,12 +44,6 @@
 <pre><strong>Input:</strong> adjList = []
 <strong>Output:</strong> []
 <strong>Explanation:</strong> This an empty graph, it does not have any nodes.
-</pre>
-
-<p><strong>Example 4:</strong></p>
-<img alt="" src="https://assets.leetcode.com/uploads/2020/01/07/graph-1.png" style="width: 272px; height: 133px;">
-<pre><strong>Input:</strong> adjList = [[2],[1]]
-<strong>Output:</strong> [[2],[1]]
 </pre>
 
 <p>&nbsp;</p>
