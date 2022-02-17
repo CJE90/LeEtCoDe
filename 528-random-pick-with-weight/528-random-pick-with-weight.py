@@ -13,9 +13,22 @@ class Solution:
 
     def pickIndex(self) -> int:
         randChoice = random.randint(1,self.totalSum)
-        for index,value in enumerate(self.prefix):
-            if randChoice <= value:
-                return index
+        return self.binarySearch(self.prefix, randChoice)
+        # for index,value in enumerate(self.prefix):
+        #     if randChoice <= value:
+        #         return index
+            
+    def binarySearch(self, arr, value) -> int:
+        lo = 0
+        hi = len(arr)-1
+        
+        while lo<hi:
+            mid = lo + (hi - lo) //2
+            if self.prefix[mid] >= value :
+                hi = mid
+            else:
+                lo = mid+1
+        return lo
         
 
 
