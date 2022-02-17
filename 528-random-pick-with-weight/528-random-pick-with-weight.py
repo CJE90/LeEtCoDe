@@ -24,7 +24,7 @@ class Solution:
         
         while lo<hi:
             mid = lo + (hi - lo) //2
-            if self.prefix[mid] >= value :
+            if arr[mid] >= value :
                 hi = mid
             else:
                 lo = mid+1
