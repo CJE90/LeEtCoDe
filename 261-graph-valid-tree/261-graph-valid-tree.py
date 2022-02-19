@@ -3,7 +3,7 @@ class Solution:
         if n == 0:
             return True
         visited = set()
-        prev = -1
+        
         adjList = defaultdict(list)
         for node1, node2 in edges:
             adjList[node1].append(node2)
