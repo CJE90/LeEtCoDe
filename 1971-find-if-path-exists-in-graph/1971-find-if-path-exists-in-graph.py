@@ -7,20 +7,18 @@ class Solution:
             
             
         visited = set()
-        stack = []
-        
-        stack.append(source)
-        
-        while stack:
-            node = stack.pop()
+        que = deque()
+        que.append(source)
+        while que:
+            node = que.popleft()
             if node == destination:
                 return True
             visited.add(node)
-            
             for child in adjList[node]:
                 if child not in visited:
-                    stack.append(child)
+                    que.append(child)
         return False
+       
         
             
             
