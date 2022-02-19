@@ -2,20 +2,13 @@ class Solution:
     def allPathsSourceTarget(self, graph: List[List[int]]) -> List[List[int]]:
         target = len(graph)-1
         result = []
-        path = []
-        
-        def dfs(node):
-            path.append(node)
+       
+        stack = [(0,[0])]
+
+        while stack:
+            node, path = stack.pop()
             if node == target:
-                result.append(path.copy())
-                return
-            for child in graph[node]:
-                dfs(child)
-                path.pop()
-                
-            return
-        
-        
-        dfs(0)
+                result.append(path)
+            for nbor in graph[node]:
+                stack.append((nbor, path+[nbor]))
         return result
-        
