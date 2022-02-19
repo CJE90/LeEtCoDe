@@ -6,21 +6,19 @@ class Solution:
             adjList[node1].append(node2)
             adjList[node2].append(node1)
         
-        stack = []
-        stack.append(source)
+        que = deque()
+        que.append(source)
         
-        while stack:
-            node = stack.pop()
+        while que:
+            node = que.popleft()
             if node == destination:
                 return True
-            
-            
-            if node not in visited:
-                for child in adjList[node]:
-                    stack.append(child)
-                    
             visited.add(node)
+            for child in adjList[node]:
+                if child not in visited:
+                    que.append(child)
         return False
+            
         
             
         
