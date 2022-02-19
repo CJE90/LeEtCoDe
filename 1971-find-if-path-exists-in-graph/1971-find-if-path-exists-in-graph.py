@@ -5,20 +5,23 @@ class Solution:
             adjList[edge[0]].append(edge[1])
             adjList[edge[1]].append(edge[0])
             
-        def dfs(source, destination, visited):
-            if source == destination:
-                return True
-            if source in visited:
-                return False
             
-            visited.add(source)
-            for child in adjList[source]:
-                if dfs(child, destination, visited):
-                    return True
-            return False
-                
         visited = set()
-        return dfs(source, destination, visited)
+        stack = []
+        
+        stack.append(source)
+        
+        while stack:
+            node = stack.pop()
+            if node == destination:
+                return True
+            visited.add(node)
+            
+            for child in adjList[node]:
+                if child not in visited:
+                    stack.append(child)
+        return False
+        
             
             
             
