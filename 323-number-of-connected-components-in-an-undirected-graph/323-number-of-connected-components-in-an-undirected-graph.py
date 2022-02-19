@@ -7,18 +7,22 @@ class Solution:
             adjList[node1].append(node2)
             adjList[node2].append(node1)
         
-        def dfs(node):
-            if node in visited:
-                return
-            visited.add(node)
-            for child in adjList[node]:
-                dfs(child)
-            return
+        que = deque()
         
+        def bfs(node):
+            que.append(node)
+            while que:
+                curNode = que.popleft()
+                visited.add(curNode)
+                for child in adjList[curNode]:
+                    if child not in visited:
+                        que.append(child)
         
+                    
         for i in range(n):
             if i not in visited:
-                dfs(i)
+                bfs(i)
                 count += 1
         return count
+        
     
