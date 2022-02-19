@@ -1,44 +1,41 @@
 class Solution:
     def validTree(self, n: int, edges: List[List[int]]) -> bool:
-        UF = UnionByRank(n)
-        for edge in edges:
-            if UF.connected(edge[0], edge[1]):
+        if n == 0:
+            return True
+        visited = set()
+        prev = -1
+        adjList = defaultdict(list)
+        for node1, node2 in edges:
+            adjList[node1].append(node2)
+            adjList[node2].append(node1)
+            
+        def dfs(node, prev):
+            if node == prev:
+                return True
+            if node in visited:
                 return False
-            else:
-                UF.union(edge[0], edge[1])
-        a = set()
-        for i in range(n):
-            a.add(UF.find(i))
-        
-        return len(a) == 1
-        
-        
-        
-class UnionByRank:
-    def __init__(self, size):
-        self.root = [i for i in range(size)]
-        self.rank = [1 for i in range(size)]
-    
-    def find(self, x):
-        while self.root[x] != x:
-            x = self.root[x]
-        return x
-
-    def connected(self, x, y):
-        return self.find(x) == self.find(y)
-
-    def union(self, x, y):
-        rootX = self.find(x)
-        rootY = self.find(y)
-
-        if rootX != rootY:
-            if self.rank[rootX] > self.rank[rootY]:
-                self.root[rootY] = rootX
-            elif self.rank[rootX] < self.rank[rootY]:
-                self.root[rootX] = rootY
-            else:
-                self.root[rootY] = rootX
-                self.rank[rootX] += 1
-        
-
+            visited.add(node)
+            for child in adjList[node]:
+                if child != prev:
+                    if not dfs(child, node):
+                        return False
+            return True
+        return dfs(0, -1) and len(visited) == n
+            
+            
+#         def dfs(node):
+#             if node in visited:
+#                 return False
+#             visited.add(node)
+            
+#             for child in adjList[node]:
+#                 if self.prev != child:
+#                     self.prev = node
+#                     if not dfs(child):
+#                         return False
+#             return True
+                    
+            
+            
+#         return dfs(0) and len(visited) == n
         
