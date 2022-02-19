@@ -9,33 +9,29 @@ class Solution:
             adjList[node1].append(node2)
             adjList[node2].append(node1)
             
-        def dfs(node, prev):
-            if node == prev:
-                return True
-            if node in visited:
+        stack = [(0,-1)]
+        while stack:
+            curNode, prevNode = stack.pop()
+            if curNode in visited:
                 return False
-            visited.add(node)
-            for child in adjList[node]:
-                if child != prev:
-                    if not dfs(child, node):
-                        return False
-            return True
-        return dfs(0, -1) and len(visited) == n
+            visited.add(curNode)
+            for child in adjList[curNode]:
+                if child == prevNode:
+                    continue
+                stack.append((child, curNode))
+        return len(visited) == n and True
             
-            
-#         def dfs(node):
+#         def dfs(node, prev):
+#             if node == prev:
+#                 return True
 #             if node in visited:
 #                 return False
 #             visited.add(node)
-            
 #             for child in adjList[node]:
-#                 if self.prev != child:
-#                     self.prev = node
-#                     if not dfs(child):
+#                 if child != prev:
+#                     if not dfs(child, node):
 #                         return False
 #             return True
-                    
+#         return dfs(0, -1) and len(visited) == n
             
             
-#         return dfs(0) and len(visited) == n
-        
