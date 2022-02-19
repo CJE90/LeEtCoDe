@@ -6,20 +6,21 @@ class Solution:
             adjList[node1].append(node2)
             adjList[node2].append(node1)
         
-        def dfs(node):
+        stack = []
+        stack.append(source)
+        
+        while stack:
+            node = stack.pop()
             if node == destination:
                 return True
-            if node in visited:
-                return False
             
+            
+            if node not in visited:
+                for child in adjList[node]:
+                    stack.append(child)
+                    
             visited.add(node)
-            
-            for child in adjList[node]:
-                if dfs(child):
-                    return True
-            return False
-        
-        return dfs(source)
+        return False
         
             
         
