@@ -19,5 +19,4 @@ class Solution:
             return None
         return right or left
         
-
         
