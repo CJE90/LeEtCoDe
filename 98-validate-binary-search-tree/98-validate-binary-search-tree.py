@@ -13,10 +13,10 @@ class Solution:
                 return True
             if root.val <= lo or root.val >= hi:
                 return False
-            if root.left and root.val < root.left.val:
-                return False
-            if root.right and root.val > root.right.val:
-                return False
+            # if root.left and root.val < root.left.val:
+            #     return False
+            # if root.right and root.val > root.right.val:
+            #     return False
             
             
             left = dfs(root.left, lo, root.val)
