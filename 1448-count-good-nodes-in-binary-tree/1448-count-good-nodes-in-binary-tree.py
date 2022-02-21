@@ -9,17 +9,17 @@ class Solution:
         if not root:
             return 0
         
-        self.count = 0
+       
         
         def dfs(node, curMax):
             if not node:
-                return
-            if curMax <= node.val:
-                self.count += 1
-                curMax = node.val
-            dfs(node.left, curMax)
-            dfs(node.right, curMax)
+                return 0
+            res = 1 if node.val >= curMax else 0
+            curMax = max(curMax, node.val)
+            left = dfs(node.left, curMax)
+            right = dfs(node.right, curMax)
+            return res + left + right
         
-        dfs(root, root.val)
-        return self.count
+        return dfs(root, root.val)
+        
         
