@@ -18,7 +18,7 @@ class Solution:
             
             if not left[0] or not right[0] or abs(left[1]-right[1])>1:
                 return [False, -1]
-            return max([left[0],left[1]+1], [right[0], right[1]+1])
+            return [True,1+ max(left[1], right[1])]
         a = dfs(root)
         return a[0]
         
