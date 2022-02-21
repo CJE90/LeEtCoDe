@@ -16,8 +16,9 @@ class Solution:
                 return
             if curMax <= node.val:
                 self.count += 1
-            dfs(node.left, max(node.val, curMax))
-            dfs(node.right, max(node.val, curMax))
+                curMax = node.val
+            dfs(node.left, curMax)
+            dfs(node.right, curMax)
         
         dfs(root, root.val)
         return self.count
