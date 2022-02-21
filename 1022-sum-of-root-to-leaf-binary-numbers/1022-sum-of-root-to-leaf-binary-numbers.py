@@ -19,5 +19,4 @@ class Solution:
                 
         res = []
         dfs(root, "")
-        print(res)
         return sum(res)
