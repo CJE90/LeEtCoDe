@@ -9,16 +9,19 @@ class Solution:
         if not root:
             return 0
         
-        def dfs(node, path):
+        result = []
+        
+        def dfs(node, string):
+            string = string+str(node.val)
             if not node.left and not node.right:
-                res.append(int(path+str(node.val)))
+                result.append(int(string))
+                return
             if node.left:
-                dfs(node.left, path+str(node.val))
+                dfs(node.left, string)
             if node.right:
-                dfs(node.right, path+str(node.val))
-                
-        res = []
+                dfs(node.right, string)
+        
+        
         dfs(root, "")
-        return sum(res)
-                
+        return sum(result)
         
