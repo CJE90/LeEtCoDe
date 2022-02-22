@@ -11,17 +11,18 @@ class Solution:
         
         result = []
         
-        def dfs(node, string):
-            string = string+str(node.val)
+        def dfs(node, num):
+            num *= 10
+            num += node.val
             if not node.left and not node.right:
-                result.append(int(string))
+                result.append(num)
                 return
             if node.left:
-                dfs(node.left, string)
+                dfs(node.left, num)
             if node.right:
-                dfs(node.right, string)
+                dfs(node.right, num)
         
         
-        dfs(root, "")
+        dfs(root, 0)
         return sum(result)
         
