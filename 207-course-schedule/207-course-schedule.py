@@ -1,29 +1,35 @@
 class Solution:
     def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
-        if numCourses ==0:
+        if numCourses == 0:
             return False
+        visited = set()
+        visiting = set()
         adjList = defaultdict(list)
-        indegree = {i:0 for i in range(numCourses)}
         
         for course, prereq in prerequisites:
-            adjList[prereq].append(course)
-            indegree[course] += 1
-        
-        que = deque()
-        for course in indegree:
-            if indegree[course] == 0:
-                que.append(course)
-        
-        while que:
-            node = que.popleft()
-            for child in adjList[node]:
-                indegree[child] -= 1
-                if indegree[child] == 0:
-                    que.append(child)
-        
-        for val in indegree:
-            if indegree[val] != 0:
+            adjList[course].append(prereq)
+            
+        def dfs(node):
+            if node in visiting:
                 return False
-        return True
-                
+            if node not in adjList:
+                return True
+            visiting.add(node)
+            for child in adjList[node]:
+                if not dfs(child):
+                    return False
+            visited.add(node)
+            visiting.remove(node)
+            adjList[node] = []
+            return True
+            
         
+        for i in range(numCourses):
+            if i not in visited:
+                if not dfs(i):
+                    return False
+        return True
+        
+            
+        
+       
