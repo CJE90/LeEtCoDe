@@ -8,19 +8,20 @@ class Node:
 
 class Solution:
     def cloneGraph(self, node: 'Node') -> 'Node':
+        
         if not node:
             return None
-          
+        
         hashTable = {}
         
-        def dfs(node) -> 'Node':
+        def dfs(node):
             if node in hashTable:
                 return hashTable[node]
-            copy = Node(node.val)
-            hashTable[node] = copy
-            for child in node.neighbors:
-                copy.neighbors.append(dfs(child))
-            return copy
+            newNode = Node(node.val)
+            hashTable[node] = newNode
+            for nei in node.neighbors:
+                newNode.neighbors.append(dfs(nei))
+            return newNode
             
         return dfs(node)
         
