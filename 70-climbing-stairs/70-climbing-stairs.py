@@ -1,15 +1,12 @@
 class Solution:
     def climbStairs(self, n: int) -> int:
-        hashTable = {}
+        if n == 1:
+            return 1
+        dp = [0] * (n+1)
+        dp[1] = 1
+        dp[2] = 2
         
-        def dfs(n):
-            if n <= 2:
-                return n
-            if n in hashTable:
-                return hashTable[n]
-                        
-            hashTable[n] = dfs(n-1)+dfs(n-2)
-            return hashTable[n]
-                
-        return dfs(n)
+        for i in range(3,n+1):
+            dp[i] = dp[i-1]+dp[i-2]
+        return dp[n]
         
