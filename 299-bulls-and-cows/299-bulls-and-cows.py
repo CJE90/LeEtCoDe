@@ -7,12 +7,15 @@ class Solution:
         for index,char in enumerate(guess):
             if secret[index]==guess[index]:
                 bull += 1
-                lookup[char] -= 1    
-        for index,char in enumerate(guess):
-            if secret[index]!=guess[index] and char in lookup:
-                if lookup[char] >0:
-                    cow += 1
-                    lookup[char] -= 1
+                if lookup[char]<=0:
+                    cow-=1
+                    
+                
+            else:
+                if char in lookup and lookup[char] > 0:
+                    cow +=1
+            lookup[char] -= 1
+                
         return str(bull)+'A'+str(cow)+'B'
             
         
