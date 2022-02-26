@@ -1,26 +1,17 @@
 class Solution:
     def insert(self, intervals: List[List[int]], newInterval: List[int]) -> List[List[int]]:
-        intervals.append(newInterval)
-        intervals.sort(key = lambda x:x[0])
-        return self.merge(intervals)
-            
-        
-        
-        
-        
-        
-        
-    def merge(self, intervals: List[List[int]]) -> List[List[int]]:
-        '''
-        Time Complexity: O(NlogN) logN for the sort and N for the entire walk through intervals array
-        Space Complexity: O(N) result array may store every interval in intervals array
-        '''
-        intervals.sort(key = lambda x:x[0])
         result = []
-        for interval in intervals:
-            if result and interval[0] <= result[-1][1]:
-                result[-1][1] = max(interval[1], result[-1][1])
-            else:
-                result.append(interval)
+        for i in intervals:
+            if i[1] < newInterval[0]:
+                result.append(i)
+            elif newInterval[1] < i[0]:
+                result.append(newInterval)
+                newInterval = i
+            elif newInterval[0] <= i[1] or newInterval[1]<=interval[1]:
+                newInterval[0] = min(newInterval[0], i[0])
+                newInterval[1] = max(newInterval[1], i[1])
+                
+        result.append(newInterval)
         return result
+                
         
