@@ -3,7 +3,7 @@ class Solution:
         if len(time) == 1:
             return time[0]*totalTrips
         lo = 1
-        hi = max(time)*totalTrips
+        hi = min(time)*totalTrips
         
         while lo < hi:
             mid = lo + (hi - lo) //2
