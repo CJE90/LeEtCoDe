@@ -7,6 +7,8 @@
 class Solution:
     def delNodes(self, root: Optional[TreeNode], to_delete: List[int]) -> List[TreeNode]:
         result = []
+        needToDelete = set(to_delete)
+        
         
         def deleteNodes(node):
             if not node:
@@ -14,7 +16,7 @@ class Solution:
             node.left = deleteNodes(node.left)
             node.right = deleteNodes(node.right)
             
-            if node.val in to_delete:
+            if node.val in needToDelete:
                 if node.left:
                     result.append(node.left)
                 if node.right:
@@ -24,7 +26,7 @@ class Solution:
             return node
             
         deleteNodes(root)
-        if root.val not in to_delete:
+        if root.val not in needToDelete:
             result.append(root)
         return result
         
