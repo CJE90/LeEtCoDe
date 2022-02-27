@@ -1,32 +1,15 @@
 class Solution:
     def minMeetingRooms(self, intervals: List[List[int]]) -> int:
-        startTimes = [i[0] for i in intervals]
-        endTimes = [i[1] for i in intervals]
-        startTimes.sort()
-        endTimes.sort()
-        roomsNeeded = 0
-        while(len(startTimes) > 0):
-            startTime = startTimes.pop(0)
-            endTime = endTimes[0]
-            if endTime <= startTime:
-                endTimes.pop(0)
-            else:
-                roomsNeeded += 1
-        return roomsNeeded
-                                      
-        # startTimes = [i[0] for i in intervals]
-        # endTimes = [i[1] for i in intervals]
-        # startTimes = sorted(startTimes)
-        # endTimes = sorted(endTimes)
-        # rooms = 0
-        # while(len(startTimes) > 0):
-        #     startTime = startTimes.pop(0)
-        #     #now a meeting is going to start, is there a meeting ends
-        #     #(meaning a meeting room is released)?
-        #     endTime = endTimes[0]
-        #     if endTime <= startTime:
-        #         endTimes.pop(0)
-        #     else:
-        #         #need to ask for a new room
-        #         rooms += 1
-        # return rooms
+        value_list = []
+        temp_value = 0
+        res = 0
+        
+        for interval in intervals:
+            value_list.append((interval[0], 1))
+            value_list.append((interval[1], -1))
+        
+        for value in sorted(value_list):
+            temp_value += value[1]
+            res = max(res, temp_value)
+            
+        return res
