@@ -1,16 +1,18 @@
 class Solution:
     def findMinArrowShots(self, points: List[List[int]]) -> int:
+        needed_arrrows = len(points)
         points.sort(key = lambda x:x[1])
-        
-        count = len(points)
-        prevEnd = -inf
+        prev_ballon_end = -inf
         for s,e in points:
-            if s > prevEnd:
-                prevEnd = e
-                
+            if s > prev_ballon_end:
+                prev_ballon_end = e
             else:
-                count -= 1
-                
-        return count
-            
-        
+                needed_arrrows -= 1
+        return needed_arrrows
+    
+    
+    
+    
+    
+    
+    
