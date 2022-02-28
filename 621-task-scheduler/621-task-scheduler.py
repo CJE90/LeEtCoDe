@@ -1,24 +1,24 @@
 class Solution:
     def leastInterval(self, tasks: List[str], n: int) -> int:
-        hm = Counter(tasks)
-        maxheap = [-cnt for cnt in hm.values()]
-        heapq.heapify(maxheap)
-        time = 0
+        lookup = Counter(tasks)
         que = deque()
+        maxHeap = [-cnt for cnt in lookup.values()]
+        heapq.heapify(maxHeap)
+        time = 0
         
-        while maxheap or que:
+        while maxHeap or que:
             time += 1
-            if maxheap:
-                taskCount = 1 + heapq.heappop(maxheap)
+            if maxHeap:
+                task = heapq.heappop(maxHeap)
+                task += 1
+                if task:
+                    que.append((task, time+n))
             
-                if taskCount:
-                    que.append([taskCount, time+n])
-            if que:        
-                possibleTask = que[0]
-                if possibleTask[1] == time:
-                    heapq.heappush(maxheap, que.popleft()[0])
-        
+            if que and que[0][1] == time:
+                taskToAddToHeap = que.popleft()
+                heapq.heappush(maxHeap,taskToAddToHeap[0])
         return time
+  
     '''
     1. create hashmap for character frequency
     2. convert that character frequency count to maxHeap
