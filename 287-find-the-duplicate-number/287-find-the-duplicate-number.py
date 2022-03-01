@@ -1,23 +1,15 @@
 class Solution:
     def findDuplicate(self, nums: List[int]) -> int:
-        lo = 1
-        hi = max(nums)
-        
-        def goodCount(count):
-            runsum = 0
-            for val in nums:
-                if val <= count:
-                    runsum +=1
-                
-            return runsum > count
-        
-        while lo < hi:
-            mid = lo + (hi - lo) // 2
-            if goodCount(mid):
-                hi = mid
-            else:
-                lo = mid+1
-        return lo
-        
-        
+        fast = nums[0]
+        slow = nums[0]
+        while True:
+            fast = nums[nums[fast]]
+            slow = nums[slow]
+            if fast == slow:
+                break
+        slow = nums[0]
+        while fast != slow:
+            slow = nums[slow]
+            fast = nums[fast]
+        return slow
         
