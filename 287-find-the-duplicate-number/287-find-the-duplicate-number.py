@@ -1,12 +1,23 @@
 class Solution:
     def findDuplicate(self, nums: List[int]) -> int:
-        def store(nums, cur):
-            if cur == nums[cur]:
-                return cur
-            nxt = nums[cur]
-            nums[cur] = cur
-            return store(nums, nxt)
-        return store(nums, 0)
+        lo = 1
+        hi = max(nums)
+        
+        def goodCount(count):
+            runsum = 0
+            for val in nums:
+                if val <= count:
+                    runsum +=1
+                
+            return runsum > count
+        
+        while lo < hi:
+            mid = lo + (hi - lo) // 2
+            if goodCount(mid):
+                hi = mid
+            else:
+                lo = mid+1
+        return lo
         
         
         
