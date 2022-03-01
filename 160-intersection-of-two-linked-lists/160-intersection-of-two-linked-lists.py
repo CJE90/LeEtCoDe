@@ -6,16 +6,14 @@
 
 class Solution:
     def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> Optional[ListNode]:
-        nodes = defaultdict(int)
-        
+        lookup = {}
         while headA:
-            nodes[headA] += 1
+            lookup[headA] = headA
             headA = headA.next
-        
         while headB:
-            if headB in nodes:
+            if headB in lookup:
                 return headB
-            nodes[headB] += 1
             headB = headB.next
-
         return None
+            
+        
