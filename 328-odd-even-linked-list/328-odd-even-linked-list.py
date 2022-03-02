@@ -5,17 +5,20 @@
 #         self.next = next
 class Solution:
     def oddEvenList(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        if not head:
-            return
-        odd = head
-        even, second_node = head.next, head.next
-    
-        while odd.next and even.next:
-            odd.next = odd.next.next
-            if odd.next:
-                odd = odd.next
-            even.next = even.next.next
-            even = even.next
-    
-        odd.next = second_node
-        return head
+        odds = ListNode(0)
+        evens = ListNode(0)
+        oddsHead = odds
+        evensHead = evens
+        isOdd = True
+        while head:
+            if isOdd:
+                odds.next = head
+                odds = odds.next
+            else:
+                evens.next = head
+                evens = evens.next
+            isOdd = not isOdd
+            head = head.next
+        evens.next = None
+        odds.next = evensHead.next
+        return oddsHead.next
