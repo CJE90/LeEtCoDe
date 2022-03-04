@@ -14,19 +14,4 @@ class Solution:
                 result.append(nums[que[0]])
                 l += 1
         return result
-        
-        
-        
-        
-# Q: 1 2
-# result:[]
-# r = 2
-# l = 1
-        
-        
-        
-#         1 3 -1 -3 -2 5 
-        
-        
-        
-#           5
+    
