@@ -1,29 +1,22 @@
 class Solution:
     def numIslands(self, grid: List[List[str]]) -> int:
-        rowLen = len(grid)
-        colLen = len(grid[0])
-        hashSet = set()
-        
+        visited = set()
+        m = len(grid)
+        n = len(grid[0])
         count = 0
-        
-        def sink(grid, i, j) -> None:
-            if i < 0 or i >= rowLen or j < 0 or j >= colLen or grid[i][j] != "1" or (i,j) in hashSet:
-                return
-            hashSet.add((i,j))
-            
-            sink(grid, i-1, j)
-            sink(grid, i+1, j)
-            sink(grid, i, j-1)
-            sink(grid, i, j+1)
-            return
-        
-        
-        for i in range(rowLen):
-            for j in range(colLen):
-                if grid[i][j] == "1" and (i,j) not in hashSet:
-                    sink(grid, i, j)
+        def bfs(r,c):
+            visited.add((r,c))
+            que = deque([(r,c)])
+            while que:
+                row,col = que.popleft()
+                for newRow, newCol in ((row+1,col),(row-1,col),(row,col-1),(row,col+1)):
+                    if 0 <= newRow < m and 0 <= newCol < n and (newRow,newCol) not in visited and grid[newRow][newCol] == "1":
+                        que.append((newRow,newCol))
+                        visited.add((newRow,newCol))
+        for i in range(m):
+            for j in range(n):
+                if grid[i][j] == "1" and (i,j) not in visited:
+                    bfs(i,j)
                     count += 1
-                    
         return count
-        
         
