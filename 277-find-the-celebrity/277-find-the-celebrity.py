@@ -5,15 +5,15 @@
 class Solution:
     def findCelebrity(self, n: int) -> int:
         
-        def helper(id):
-            for i in range(n):
-                if id != i:
-                    if knows(id, i) or not knows(i,id):
-                        return False
-            return True
-        
+        c = 0
+        for i in range(1,n):
+            if knows(c,i):
+                c = i
         for i in range(n):
-            if helper(i):
-                return i
-        return -1
+            if i != c:
+                if not knows(i,c) or knows(c,i):
+                    return -1
+        return c
+        
+        
         
