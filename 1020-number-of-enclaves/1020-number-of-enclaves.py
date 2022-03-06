@@ -29,7 +29,7 @@ class Solution:
         
         for r in range(1,len(grid)-1):
             for c in range(1,len(grid[0])-1):
-                if grid[r][c] == 1:
-                    exploreAndCount(r,c,1)
+                if grid[r][c] == 1 and (r,c) not in visited:
+                    self.count += 1
         return self.count
             
