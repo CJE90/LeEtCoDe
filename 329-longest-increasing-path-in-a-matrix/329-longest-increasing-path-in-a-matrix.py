@@ -1,35 +1,39 @@
-from collections import deque
 class Solution:
     def longestIncreasingPath(self, matrix: List[List[int]]) -> int:
-        
         m = len(matrix)
         n = len(matrix[0])
         if m == 1 and n == 1:
             return 1
-        inDegree = defaultdict(int)
-        adjList = defaultdict(list)
-        steps = 0
-        for i in range(m):
-            for j in range(n):
-                for x,y in [[i+1,j],[i-1,j],[i,j-1],[i,j+1]]:
-                    if 0<=x<m and 0<=y<n and matrix[i][j]<matrix[x][y]:
-                        adjList[(i,j)].append((x,y))
-                        inDegree[(x,y)] += 1
+        dp = [[0]*n for i in range(m)]
+        res_path = []
         
-        que = deque()
-        for node in adjList:
-            if node not in inDegree:
-                que.append(node)
-    
-        while que:
-            size = len(que)
-            steps +=1
-            for _ in range(size):
-                node = que.popleft()
-                for child in adjList[node]:
-                    inDegree[child] -= 1
-                    if inDegree[child] == 0:
-                        que.append(child)
-            
-        return steps
-                
+        def dfs(r,c):
+            if not dp[r][c]:
+                val = matrix[r][c]
+                if r and val > matrix[r-1][c]:
+                    up = dfs(r-1,c)
+                else:
+                    up = 0
+                if r < m-1 and val > matrix[r+1][c]:
+                    down = dfs(r+1,c)
+                else:
+                    down = 0
+                if c and val > matrix[r][c-1]:
+                    left = dfs(r,c-1)
+                else:
+                    left = 0
+                if c< n-1 and val > matrix[r][c+1]:
+                    right = dfs(r,c+1)
+                else:
+                    right = 0
+                dp[r][c] = 1 + max(up,down,left,right)       
+            return dp[r][c]
+
+        
+        for r in range(m):
+            for c in range(n):
+                res_path.append(dfs(r,c))
+        print(res_path)
+        return max(res_path)
+        
+
