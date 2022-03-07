@@ -9,7 +9,7 @@ class Solution:
         output = defaultdict(list)
         
         def getHeight(node, level):
-            if not node: return level
+            if not node: return 0
             left = getHeight(node.left, level)
             right = getHeight(node.right, level)
             level = max(left,right)
