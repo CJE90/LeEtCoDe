@@ -8,13 +8,13 @@ class Solution:
     def findLeaves(self, root: Optional[TreeNode]) -> List[List[int]]:
         output = defaultdict(list)
         
-        def getHeight(node, level):
+        def getHeight(node):
             if not node: return 0
-            left = getHeight(node.left, level)
-            right = getHeight(node.right, level)
-            level = max(left,right)
+            left = getHeight(node.left)
+            right = getHeight(node.right)
+            level = 1+max(left,right)
             output[level].append(node.val)
-            return level+1
+            return level
         
-        getHeight(root, 0)
+        getHeight(root)
         return output.values()
