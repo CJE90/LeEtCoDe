@@ -9,8 +9,6 @@ class Solution:
         if not root:
             return 0
         
-       
-        
         def dfs(node, curMax):
             if not node:
                 return 0
