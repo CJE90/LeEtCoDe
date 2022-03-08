@@ -15,9 +15,13 @@ class Solution:
             return True
         if not left or not right:
             return False
+        
         if left.val == right.val:
-            outer = self.isMirror(left.left, right.right)
-            inner = self.isMirror(left.right, right.left)
-            return outer and inner
-        else:
-            return False
+            l = self.isMirror(left.left, right.right)
+            r = self.isMirror(left.right, right.left)
+            return l and r
+        else: return False
+        
+    
+    
+    
