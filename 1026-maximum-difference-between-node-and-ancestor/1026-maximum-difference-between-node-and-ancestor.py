@@ -8,18 +8,15 @@ class Solution:
     def maxAncestorDiff(self, root: Optional[TreeNode]) -> int:
         
         
-        
-        def dfs(root, lowestFound, highestFound):
-            if not root:
-                return highestFound-lowestFound
+        def findMaxDiff(node: TreeNode, lo: int, hi: int) -> int:
+            if not node:
+                return hi-lo
+            hi = max(hi, node.val)
+            lo = min(lo, node.val)
+            left = findMaxDiff(node.left, lo, hi)
+            right = findMaxDiff(node.right, lo,hi)
+            return max(left,right)
             
-            lowestFound = min(root.val, lowestFound)
-            highestFound = max(root.val, highestFound)
             
-            leftDiff = dfs(root.left, lowestFound, highestFound)
-            rightDiff = dfs(root.right, lowestFound, highestFound)
+        return findMaxDiff(root, inf, -inf)
             
-            return max(abs(leftDiff), abs(rightDiff))
-        return dfs(root, root.val, root.val)
-            
-        
