@@ -4,17 +4,19 @@ class Solution:
         
         result = []
         subset = []
-        lookup = defaultdict(list)
+       
         
         def dfs(i):
             if i >= len(nums):
-                if tuple(subset) not in lookup:
-                    result.append(subset.copy())
-                    lookup[tuple(subset)] = 1
+                
+                result.append(subset.copy())
+                    
                 return
             subset.append(nums[i])
             dfs(i+1)
             subset.pop()
+            while i + 1 < len(nums) and nums[i] == nums[i+1]:
+                i+=1
             dfs(i+1)
             
         dfs(0)
