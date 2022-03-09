@@ -5,13 +5,12 @@ class Solution:
         self.backtrack(nums, result, [])
         return result
     
-    def backtrack(self, nums: List[int], result: List[int], path: List[int]):
+    def backtrack(self, nums, result, path):
         
-        result.append(path.copy())
+        result.append(path)
         for i in range(len(nums)):
-            path.append(nums[i])
-            self.backtrack(nums[i+1:], result, path)
-            path.pop()
+            self.backtrack(nums[i+1:], result, path+[nums[i]])
+            # path.pop()
         
         
         
