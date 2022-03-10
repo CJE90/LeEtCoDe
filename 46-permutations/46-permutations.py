@@ -1,21 +1,37 @@
 class Solution:
     def permute(self, nums: List[int]) -> List[List[int]]:
         result = []
-        n = len(nums)
-        def backtrack(perm):
-            if len(perm) == len(nums):
-                result.append(perm.copy())
+        
+        def dfs(start, end):
+            if start == end:
+                result.append(nums[:])
                 return
-            for i in range(n):
-                if nums[i] in perm:
-                    continue
-                perm.append(nums[i])
-                backtrack(perm)
-                perm.pop()
-        backtrack([])
-        return result        
+            for i in range(start, end):
+                nums[i], nums[start] = nums[start],nums[i]
+                dfs(start+1,end)
+                nums[i], nums[start] = nums[start],nums[i]
+        
+                
+        dfs(0,len(nums))
+        return result
         
         
+#--------------------------------------------------------------------------- 
+        # result = []
+        # n = len(nums)
+        # def backtrack(perm):
+        #     if len(perm) == len(nums):
+        #         result.append(perm.copy())
+        #         return
+        #     for i in range(n):
+        #         if nums[i] in perm:
+        #             continue
+        #         perm.append(nums[i])
+        #         backtrack(perm)
+        #         perm.pop()
+        # backtrack([])
+        # return result        
+              
 #--------------------------------------------------------------------------- 
 #         result = []
 #         if len(nums) == 1:
