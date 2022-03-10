@@ -1,17 +1,35 @@
 class Solution:
     def letterCasePermutation(self, s: str) -> List[str]:
         result = []
-        S = list(s)
+        chars = list(s)
         
         def backtrack(index):
-            result.append(''.join(S))
-            for index in range(index, len(S)):
-                if S[index].isalpha():
-                    S[index] = S[index].swapcase()
+            result.append("".join(chars))
+            for index in range(index, len(chars)):
+                if chars[index].isalpha():
+                    chars[index] = chars[index].swapcase()
                     backtrack(index+1)
-                    S[index] = S[index].swapcase()
+                    chars[index] = chars[index].swapcase()
+        
         backtrack(0)
         return result
+        
+        
+        
+        
+        
+#         result = []
+#         S = list(s)
+        
+#         def backtrack(index):
+#             result.append(''.join(S))
+#             for index in range(index, len(S)):
+#                 if S[index].isalpha():
+#                     S[index] = S[index].swapcase()
+#                     backtrack(index+1)
+#                     S[index] = S[index].swapcase()
+#         backtrack(0)
+#         return result
         
         
         
