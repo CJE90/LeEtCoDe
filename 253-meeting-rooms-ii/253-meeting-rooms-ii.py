@@ -4,8 +4,7 @@ class Solution:
         numOfRooms = []
         for interval in intervals:
             if numOfRooms and interval[0] >= numOfRooms[0]:
-                heapq.heappop(numOfRooms)
-                heapq.heappush(numOfRooms, interval[1])
+                heapq.heapreplace(numOfRooms, interval[1])
                 
             else:
                 heapq.heappush(numOfRooms, interval[1])
