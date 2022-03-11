@@ -8,6 +8,7 @@ class Solution:
     def delNodes(self, root: Optional[TreeNode], to_delete: List[int]) -> List[TreeNode]:
         
         result = []
+        removeNodesSet = set(to_delete)
         
         def exploreAndPrune(node):
             if not node:
@@ -16,7 +17,7 @@ class Solution:
             node.left = exploreAndPrune(node.left)
             node.right = exploreAndPrune(node.right)
             
-            if node.val in to_delete:
+            if node.val in removeNodesSet:
                 if node.left:
                     result.append(node.left)
                 if node.right:
@@ -25,7 +26,7 @@ class Solution:
             return node
         
         exploreAndPrune(root)
-        if root.val not in to_delete:
+        if root.val not in removeNodesSet:
             result.append(root)
         return result
 
