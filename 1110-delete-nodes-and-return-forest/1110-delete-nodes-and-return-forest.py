@@ -29,47 +29,7 @@ class Solution:
         if root.val not in removeNodesSet:
             result.append(root)
         return result
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-#         result = []
+  #         result = []
         
 #         def deleteNodes(node):
 #             if not node:
