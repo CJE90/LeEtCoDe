@@ -9,12 +9,12 @@ class Solution:
                 mid = (lo+hi) // 2
                 if nums[mid] == target:
                     if isFirst:
-                        if mid == lo or (mid-1 >= 0 and nums[mid-1] != target):
+                        if mid == lo or (nums[mid-1] != target):
                             return mid
                         else:
                             hi = mid-1
                     else:
-                        if mid == hi or (mid+1 < len(nums) and nums[mid+1] != target):
+                        if mid == hi or (nums[mid+1] != target):
                             return mid
                         else:
                             lo = mid+1
