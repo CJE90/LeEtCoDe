@@ -7,6 +7,9 @@ class Solution:
             if len(path) == k:
                 result.append(path[:])
                 return
+            if k-len(path) > n-i+1:
+                return
+            
             for i in range(i, n+1):
                 path.append(i)
                 dfs(i+1,path)
