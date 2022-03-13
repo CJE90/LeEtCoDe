@@ -24,10 +24,7 @@ class Solution:
                 leftSum = 1+left
             if node.right and node.right.val == node.val:
                 rightSum = 1 + right
-            if rightSum and leftSum:
-                maxPath = max(maxPath, leftSum+rightSum)
-            else:
-                maxPath = max(maxPath, leftSum, rightSum)
+            maxPath = max(maxPath, leftSum+rightSum)
             
             
             return max(leftSum, rightSum)
