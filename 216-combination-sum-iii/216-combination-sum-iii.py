@@ -8,9 +8,10 @@ class Solution:
             if len(path) > k or target < 0:
                 return
             for i in range(num, 10):
-                path.append(i)
-                dfs(i+1, path, target-i)
-                path.pop()
+                if i < n:
+                    path.append(i)
+                    dfs(i+1, path, target-i)
+                    path.pop()
         
         
         dfs(1, [], n)
