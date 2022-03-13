@@ -16,9 +16,7 @@ class Solution:
             
             left = explore(node.left, lo, node.val)
             right = explore(node.right, node.val, hi)
-            if left and right:
-                return True
-            return False
+            return left and right
             
         
         return explore(root, -inf, inf)
