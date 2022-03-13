@@ -10,9 +10,10 @@ class Solution:
             if target < 0:
                 return
             for i in range(index, len(candidates)):
-                if i > index and candidates[i] == candidates[i-1]:
+                if (i > index and candidates[i] == candidates[i-1]) or candidates[i] > target:
                    
                     continue
+                
                 path.append(candidates[i])
                 target -= candidates[i]
                 explore(i+1, path, target)
