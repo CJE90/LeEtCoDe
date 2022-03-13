@@ -11,7 +11,8 @@ class Solution:
             for i in range(index, len(candidates)):
                 path.append(candidates[i])
                 target -= candidates[i]
-                explore(i, path, target)
+                if target >= 0:
+                    explore(i, path, target)
                 target += candidates[i]
                 path.pop()
         
