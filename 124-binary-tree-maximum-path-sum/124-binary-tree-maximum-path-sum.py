@@ -12,10 +12,9 @@ class Solution:
             nonlocal max_found
             if not node:
                 return 0
-            left = 0
             right = 0
-            left = max(explore(node.left), left)
-            right = max(explore(node.right), right)
+            left = max(explore(node.left), 0)
+            right = max(explore(node.right), 0)
             max_found = max(max_found, node.val+left+right)
             return node.val+max(left,right)
             
