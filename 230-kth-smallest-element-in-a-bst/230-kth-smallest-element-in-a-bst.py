@@ -19,6 +19,8 @@ class Solution:
             if k == 0:
                 result = node.val
                 return
+            if k<0:
+                return
             explore(node.right)
             
         explore(root)
