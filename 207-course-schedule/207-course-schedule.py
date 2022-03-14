@@ -16,7 +16,7 @@ class Solution:
             for preReq in adjList[node]:
                 if not explore(preReq):
                     return False
-            #visited.add(node)
+            visited.add(node)
             visiting.remove(node)
             adjList[node] = []
             return True
