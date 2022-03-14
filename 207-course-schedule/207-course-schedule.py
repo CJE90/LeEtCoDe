@@ -9,8 +9,8 @@ class Solution:
         def explore(node):
             if node in visiting:
                 return False
-            # if node not in adjList:
-            #     return True
+            if node not in adjList:
+                return True
             visiting.add(node)
             
             for preReq in adjList[node]:
