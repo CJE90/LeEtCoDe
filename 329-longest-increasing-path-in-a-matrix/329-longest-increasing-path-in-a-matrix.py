@@ -1,39 +1,23 @@
 class Solution:
     def longestIncreasingPath(self, matrix: List[List[int]]) -> int:
-        m = len(matrix)
-        n = len(matrix[0])
-        if m == 1 and n == 1:
-            return 1
-        dp = [[0]*n for i in range(m)]
-        res_path = []
+        maxPath = 0
+        dp = [[0 for j in range(len(matrix[0]))] for i in range(len(matrix))]
         
-        def dfs(r,c):
-            if not dp[r][c]:
-                val = matrix[r][c]
-                if r and val > matrix[r-1][c]:
-                    up = dfs(r-1,c)
-                else:
-                    up = 0
-                if r < m-1 and val > matrix[r+1][c]:
-                    down = dfs(r+1,c)
-                else:
-                    down = 0
-                if c and val > matrix[r][c-1]:
-                    left = dfs(r,c-1)
-                else:
-                    left = 0
-                if c< n-1 and val > matrix[r][c+1]:
-                    right = dfs(r,c+1)
-                else:
-                    right = 0
-                dp[r][c] = 1 + max(up,down,left,right)       
+        
+        def explore(r,c):
+            if dp[r][c] > 0:
+                return dp[r][c]
+            
+            for newRow, newCol in [[r+1,c],[r-1,c],[r,c+1],[r,c-1]]:
+                if 0 <= newRow < len(matrix) and 0<= newCol < len(matrix[0]) and matrix[newRow][newCol]>matrix[r][c]:
+                    dp[r][c] = max(dp[r][c], explore(newRow,newCol))
+            dp[r][c] += 1
             return dp[r][c]
-
+               
         
-        for r in range(m):
-            for c in range(n):
-                res_path.append(dfs(r,c))
-        print(res_path)
-        return max(res_path)
-        
-
+        for r in range(len(matrix)):
+            for c in range(len(matrix[0])):
+                maxPath = max(maxPath, explore(r,c))
+        print(dp)
+        return maxPath
+    
