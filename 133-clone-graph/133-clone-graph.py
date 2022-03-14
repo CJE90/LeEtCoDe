@@ -8,20 +8,24 @@ class Node:
 
 class Solution:
     def cloneGraph(self, node: 'Node') -> 'Node':
-        
+        lookup = {}
         if not node:
             return None
         
-        hashTable = {}
-        
-        def dfs(node):
-            if node in hashTable:
-                return hashTable[node]
+        def exploreAndCreate(node):
+            if node in lookup:
+                return lookup[node]
             newNode = Node(node.val)
-            hashTable[node] = newNode
-            for nei in node.neighbors:
-                newNode.neighbors.append(dfs(nei))
+            lookup[node] = newNode
+            for child in node.neighbors:
+                newNode.neighbors.append(exploreAndCreate(child))
             return newNode
             
-        return dfs(node)
+        return exploreAndCreate(node)
+    
+    
+            
+      
+        
+      
         
