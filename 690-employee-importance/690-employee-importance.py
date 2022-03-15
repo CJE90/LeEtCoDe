@@ -12,13 +12,12 @@ class Solution:
         lookup = {}
         for emp in employees:
             lookup[emp.id]=emp
-        def explore(employee):
-            if len(employee.subordinates) == 0:
-                return employee.importance
-            curImportance = 0
-            for sub in employee.subordinates:
-                curImportance += explore(lookup[sub])
-            return employee.importance + curImportance
-        
-        
-        return explore(lookup[id])
+        que = deque()
+        que.append(lookup[id])
+        returnValue = 0
+        while que:
+            emp = que.pop()
+            returnValue += emp.importance
+            for sub in emp.subordinates:
+                que.append(lookup[sub])
+        return returnValue
