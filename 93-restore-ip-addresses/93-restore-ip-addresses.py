@@ -8,7 +8,7 @@ class Solution:
             if dots == 4 and index == len(s):
                 result.append(path[:-1])
                 return
-            if dots > 4 or index > len(s):
+            if dots >= 4 or index > len(s):
                 return
             
             for j in range(index, min(index+3, len(s))):
