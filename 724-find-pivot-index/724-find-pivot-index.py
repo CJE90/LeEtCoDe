@@ -1,23 +1,9 @@
 class Solution:
     def pivotIndex(self, nums: List[int]) -> int:
-        # [1,8,11,17,23,29]
-        # [28,27,20,17,11,6]
-        
-        leftToRight = [0 for i in range(len(nums))]
-        rightToLeft = [0 for i in range(len(nums))]
-        runSum = 0
-        for i in range(len(nums)):
-            runSum += nums[i]
-            leftToRight[i] = runSum
-        runSum = 0
-        for i in range(len(nums)-1,-1,-1):
-            
-            runSum += nums[i]
-            rightToLeft[i] = runSum
-
-       
-            
-        for i in range(len(nums)):
-            if leftToRight[i] == rightToLeft[i]:
-                return i
+        runSum = sum(nums)
+        leftSum = 0
+        for index, num in enumerate(nums):
+            if leftSum == (runSum - leftSum - num):
+                return index
+            leftSum += num
         return -1
