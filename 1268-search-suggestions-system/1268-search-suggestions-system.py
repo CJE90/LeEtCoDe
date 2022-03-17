@@ -14,7 +14,7 @@ class Trie:
                 cur.children[c] = TrieNode()
             cur = cur.children[c]
             cur.words.append(word)
-            cur.words.sort()
+            #cur.words.sort()
             if len(cur.words) > 3:
                 cur.words.pop()
     
@@ -28,6 +28,7 @@ class Trie:
             cur = cur.children[c]
             result.append(cur.words[:])
             
+            
         l_remain = len(currentString) - len(result)
         
         for _ in range(l_remain):
@@ -39,6 +40,7 @@ class Trie:
 class Solution:
     def suggestedProducts(self, products: List[str], searchWord: str) -> List[List[str]]:
         trie = Trie()
+        products.sort()
         for prod in products:
             trie.insert(prod)
         return trie.search(searchWord)
