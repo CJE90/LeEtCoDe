@@ -27,7 +27,9 @@ class Trie:
                 break
             cur = cur.children[c]
             result.append(cur.words[:])
+            
         l_remain = len(currentString) - len(result)
+        
         for _ in range(l_remain):
             result.append([])
         return result
