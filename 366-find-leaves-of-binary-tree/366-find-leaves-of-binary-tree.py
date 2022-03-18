@@ -6,15 +6,15 @@
 #         self.right = right
 class Solution:
     def findLeaves(self, root: Optional[TreeNode]) -> List[List[int]]:
-        output = defaultdict(list)
+        levels = defaultdict(list)
         
-        def getHeight(node):
-            if not node: return 0
-            left = getHeight(node.left)
-            right = getHeight(node.right)
-            level = 1+max(left,right)
-            output[level].append(node.val)
-            return level
-        
-        getHeight(root)
-        return output.values()
+        def explore(node):
+            if not node:
+                return 0
+            left = explore(node.left)
+            right = explore(node.right)
+            height = 1+max(left,right)
+            levels[height].append(node.val)
+            return height
+        explore(root)
+        return levels.values()
