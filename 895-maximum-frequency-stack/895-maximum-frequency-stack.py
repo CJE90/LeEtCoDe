@@ -1,25 +1,27 @@
 class FreqStack:
 
     def __init__(self):
-        self.frequency = defaultdict(int)
+        self.freqCount = defaultdict(int)
         self.freqStack = defaultdict(list)
+        self.maxFreq = 0
         
 
     def push(self, val: int) -> None:
-        self.frequency[val] += 1
-        x = self.frequency[val]
+        self.freqCount[val] += 1
+        x = self.freqCount[val]
         self.freqStack[x].append(val)
-        #print(self.frequency)
-        #print(self.freqStack)
+        self.maxFreq = max(self.maxFreq, x)
+        
 
     def pop(self) -> int:
-        x = max(self.frequency.values())
-        #print(x)
+        x = self.maxFreq
+        
         item = self.freqStack[x].pop()
-        #print(item)
-        self.frequency[item] -= 1
-        if self.frequency[item] == 0:
-            self.frequency.pop(item)
+        self.freqCount[item] -= 1
+        if self.freqCount[item] == 0:
+            self.freqCount.pop(item)
+        if len(self.freqStack[x]) == 0:
+            self.maxFreq -= 1
         return item
         
         
