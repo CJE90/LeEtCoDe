@@ -1,28 +1,20 @@
 class FreqStack:
 
     def __init__(self):
-        self.freqCount = defaultdict(int)
-        self.freqStack = defaultdict(list)
-        self.maxFreq = 0
+        self.heap = []
+        self.m = collections.defaultdict(int)
+        self.counter = 0
         
-
-    def push(self, val: int) -> None:
-        self.freqCount[val] += 1
-        x = self.freqCount[val]
-        self.freqStack[x].append(val)
-        self.maxFreq = max(self.maxFreq, x)
+    def push(self, x):
+        self.m[x]+=1
+        heapq.heappush(self.heap,(-self.m[x], -self.counter, x))
+        self.counter+=1
         
-
-    def pop(self) -> int:
-        x = self.maxFreq
-        
-        item = self.freqStack[x].pop()
-        self.freqCount[item] -= 1
-        if self.freqCount[item] == 0:
-            self.freqCount.pop(item)
-        if len(self.freqStack[x]) == 0:
-            self.maxFreq -= 1
-        return item
+    
+    def pop(self):
+        toBeRemoved = heapq.heappop(self.heap)
+        self.m[toBeRemoved[2]]-=1
+        return toBeRemoved[2]
         
         
 
