@@ -1,18 +1,20 @@
 class Solution:
     def lengthOfLongestSubstringTwoDistinct(self, s: str) -> int:
-        l = 0
-        longestFound = 0
         lookup = defaultdict(int)
-        
+        l = 0
+        maxWin = 0
         for r in range(len(s)):
-            lookup[s[r]] += 1
+            lookup[s[r]] += 1 
             
-            while len(lookup) > 2:
+            if len(lookup) > 2:
                 lookup[s[l]] -= 1
-                if lookup[s[l]] < 1:
+                if lookup[s[l]] == 0:
                     lookup.pop(s[l])
-                l += 1
+                l+=1
+                
             
-            longestFound = max(longestFound, r-l+1)
-        return longestFound
-    
+            maxWin = max(maxWin, r-l+1)
+        return maxWin
+        
+        
+        
