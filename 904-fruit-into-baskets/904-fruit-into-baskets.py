@@ -1,16 +1,19 @@
 class Solution:
     def totalFruit(self, fruits: List[int]) -> int:
-        pickedFruits = defaultdict(int)
+        lookup = defaultdict(int)
         l = 0
-        maxLength = 0
+        maxWin = 0
         for r in range(len(fruits)):
-            pickedFruits[fruits[r]] += 1
-            while len(pickedFruits) > 2:
-                pickedFruits[fruits[l]] -= 1
-                if pickedFruits[fruits[l]] < 1:
-                    pickedFruits.pop(fruits[l])
-                l += 1
-            maxLength = max(maxLength, r-l+1)
-        return maxLength
+            lookup[fruits[r]] += 1 
+            
+            if len(lookup) > 2:
+                lookup[fruits[l]] -= 1
+                if lookup[fruits[l]] == 0:
+                    lookup.pop(fruits[l])
+                l+=1
                 
+            
+            maxWin = max(maxWin, r-l+1)
+        return maxWin
+        
         
