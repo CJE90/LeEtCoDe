@@ -1,19 +1,18 @@
 class Solution:
     def lengthOfLongestSubstringKDistinct(self, s: str, k: int) -> int:
-        if k is 0:
-            return 0
-        seen = defaultdict(int)
+        lookup = defaultdict(int)
         l = 0
-        longestFound = -inf
         
+        maxWin = 0
         for r in range(len(s)):
-            seen[s[r]] += 1
-            while len(seen) > k and l<r:
-                seen[s[l]]-=1
-                if seen[s[l]] < 1:
-                    seen.pop(s[l])
+            lookup[s[r]] += 1
+            while len(lookup) > k:
+                lookup[s[l]] -= 1
+                if lookup[s[l]] <= 0:
+                    lookup.pop(s[l])
                 l+=1
-            longestFound = max(longestFound, r-l+1)
-        return longestFound
-                
+            
+            if len(lookup) <= k:
+                maxWin = max(maxWin, r-l+1)
+        return maxWin
         
