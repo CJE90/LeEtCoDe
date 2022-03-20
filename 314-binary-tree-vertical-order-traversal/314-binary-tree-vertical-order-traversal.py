@@ -7,11 +7,15 @@
 class Solution:
     def verticalOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
         result = defaultdict(list)
+        min_range = inf
+        max_range = -inf
         if not root: return []
         que = deque()
         que.append((root, 0))
         while que:
             node, level = que.popleft()
+            min_range = min(min_range, level)
+            max_range = max(max_range, level)
             if node.left:
                 que.append((node.left, level-1))
             if node.right:
@@ -21,6 +25,6 @@ class Solution:
         
 
 
-        return [result[x] for x in sorted(result.keys())]
+        return [result[x] for x in range(min_range, max_range+1)]
             
         
