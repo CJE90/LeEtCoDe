@@ -21,12 +21,6 @@ class Solution:
         
 
 
-        t = []
-        answer = []
-        for key in result.keys():
-            t.append(key)
-        for key in sorted(t):
-            answer.append(result[key])
-        return answer
+        return [result[x] for x in sorted(result.keys())]
             
         
