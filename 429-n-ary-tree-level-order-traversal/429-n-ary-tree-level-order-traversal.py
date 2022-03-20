@@ -8,20 +8,17 @@ class Node:
 
 class Solution:
     def levelOrder(self, root: 'Node') -> List[List[int]]:
-        if not root:
-            return []
-        que = deque()
-        que.append(root)
         result = defaultdict(list)
-        level = 0
-        while que:
-            size = len(que)
-            for _ in range(size):
-                node = que.popleft()
-                result[level].append(node.val)
-                for child in node.children:
-                    que.append(child)
-            level += 1
+        if not root: return []
+        def explore(node, level):
+            if not node:
+                return 
+            result[level].append(node.val)
+            for child in node.children:
+                explore(child, level+1)
+            return 
+        explore(root,0)
         return result.values()
+
                 
         
