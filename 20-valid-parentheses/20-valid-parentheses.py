@@ -3,18 +3,18 @@ class Solution:
         if len(s) % 2 != 0:
             return False
         stack = []
-        for i in range(len(s)):
-            if s[i] == '(':
+        for c in s:
+            if c == '(':
                 stack.append(')')
-            elif s[i] == '[':
+            elif c == '[':
                 stack.append(']')
-            elif s[i] == '{':
+            elif c == '{':
                 stack.append('}')
             else:
-                if not stack or stack[-1] != s[i]:
+                if not stack:
+                    return False
+                if stack[-1] != c:
                     return False
                 stack.pop()
         return len(stack) == 0
-                
-            
         
