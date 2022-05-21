@@ -1,13 +1,12 @@
 class Solution:
     def floodFill(self, image: List[List[int]], sr: int, sc: int, newColor: int) -> List[List[int]]:
-        if not image:
-            return None
-        if image[sr][sc] == newColor:
+        if not image or image[sr][sc] == newColor:
             return image
         oldColor = image[sr][sc]
         image[sr][sc] = newColor
         self.dfs(image, sr, sc, newColor, oldColor)
         return image
+    
     def dfs(self, image, sr, sc, newColor, oldColor):
         for dx,dy in [[1,0],[-1,0],[0,1],[0,-1]]:
             nx = sr+dx
