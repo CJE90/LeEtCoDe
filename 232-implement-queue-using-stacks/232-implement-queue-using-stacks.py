@@ -5,22 +5,24 @@ class MyQueue:
         self.popStack = []
 
     def push(self, x: int) -> None:
+        while self.popStack:
+            self.pushStack.append(self.popStack.pop())
         self.pushStack.append(x)
 
     def pop(self) -> int:
         while self.pushStack:
             self.popStack.append(self.pushStack.pop())
         val = self.popStack.pop()
-        while self.popStack:
-            self.pushStack.append(self.popStack.pop())
         return val
 
     def peek(self) -> int:
-        return self.pushStack[0]
-
+        if self.pushStack:
+            return self.pushStack[0]
+        return self.popStack[len(self.popStack)-1]
     def empty(self) -> bool:
-        return len(self.pushStack) == 0
-
+        if self.pushStack:
+            return len(self.pushStack) == 0
+        return len(self.popStack) == 0
 
 # Your MyQueue object will be instantiated and called as such:
 # obj = MyQueue()
