@@ -2,10 +2,12 @@ class Solution:
     def canConstruct(self, ransomNote: str, magazine: str) -> bool:
         if len(ransomNote) > len(magazine):
             return False
-        note_lookup = Counter(ransomNote)
-        mag_lookup = Counter(magazine)
-        for char, count in note_lookup.items():
-            if count > mag_lookup[char]:
-                return False
-        return True
         
+        mag_lookup = Counter(magazine)
+        for c in ransomNote:
+            if c not in mag_lookup:
+                return False
+            mag_lookup[c] -= 1
+            if mag_lookup[c] < 1:
+                del mag_lookup[c]
+        return True
