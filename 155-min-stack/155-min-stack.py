@@ -12,7 +12,7 @@ class MinStack:
         values = self.stack.pop()
         if not self.stack:
             self.min = inf
-        if self.min == values[0]:
+        else:
             self.min = self.stack[-1][1]
         return values[0]
 
