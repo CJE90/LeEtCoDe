@@ -1,8 +1,11 @@
 class Solution:
     def missingNumber(self, nums: List[int]) -> int:
-        seen = set(nums)
+        fullSum = 0
+        actualSum = 0
         for i in range(len(nums)):
-            if i not in seen:
-                return i
-        return len(nums)
+            fullSum += i+1
+            actualSum += nums[i]
+        return fullSum-actualSum
+    
+   
         
