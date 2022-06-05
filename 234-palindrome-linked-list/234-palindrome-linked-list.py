@@ -5,17 +5,29 @@
 #         self.next = next
 class Solution:
     def isPalindrome(self, head: Optional[ListNode]) -> bool:
-        node = head
-        l = []
+        mid = self.find_middle(head)
+        node = self.reverse_nodes(mid)
         while node:
-            l.append(node.val)
-            node = node.next
-        left = 0
-        right = len(l)-1
-        while left<right:
-            if l[left] != l[right]:
+            if node.val != head.val:
                 return False
-            left += 1
-            right -= 1
+            node = node.next
+            head = head.next
         return True
+    
+    def find_middle(self,node):
+        slow = node
+        fast = node
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+        return slow
+    def reverse_nodes(self,node):
+        prev = None
+        while node:
+            cur = node
+            node = node.next
+            cur.next = prev
+            prev = cur
+        return prev
+        
         
