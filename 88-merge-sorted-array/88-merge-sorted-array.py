@@ -3,7 +3,19 @@ class Solution:
         """
         Do not return anything, modify nums1 in-place instead.
         """
-        for i in range(n):
-            nums1[m+i] = nums2[i]
-        nums1.sort()
+        
+        copy = nums1[:m]
+        p1 = 0
+        p2 = 0
+        for i in range(n+m):
+            if p2 >= n or (p1 < m and copy[p1] <= nums2[p2]):
+                nums1[i] = copy[p1]
+                p1+=1
+            else:
+                nums1[i] = nums2[p2]
+                p2+=1
+                
+
+        
+        
         
