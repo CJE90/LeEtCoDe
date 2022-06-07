@@ -5,16 +5,12 @@ class Solution:
         if x == 1:
             return 1
         lo = 1
-        hi = x
-        
+        hi = x 
         while lo < hi:
-            mid = lo+(hi-lo) // 2
-            
+            mid = (lo+hi)//2
             if mid*mid > x:
                 hi = mid
             else:
                 lo = mid+1
         return lo-1
-            
-                
         
