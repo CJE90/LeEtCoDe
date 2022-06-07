@@ -8,7 +8,7 @@ class Solution:
         for i in range(m+n-1, -1, -1):
             if p2 < 0:
                 break
-            if p1 >= 0 and nums1[p1] >= nums2[p2]:
+            if p1 >= 0 and nums1[p1] > nums2[p2]:
                 nums1[i] = nums1[p1]
                 p1 -= 1
             else:
