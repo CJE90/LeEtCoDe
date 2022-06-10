@@ -1,76 +1,14 @@
 class Solution:
     def insert(self, intervals: List[List[int]], newInterval: List[int]) -> List[List[int]]:
-        result = []
-        
+        answer = []
         for interval in intervals:
             if interval[1] < newInterval[0]:
-                result.append(interval)
+                answer.append(interval)
             elif interval[0] > newInterval[1]:
-                result.append(newInterval)
+                answer.append(newInterval)
                 newInterval = interval
             else:
-                newInterval[0] = min(newInterval[0], interval[0])
-                newInterval[1] = max(newInterval[1], interval[1])
-        result.append(newInterval)
-        return result
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        #         result = []
-        
-#         for i in intervals:
-#             if i[1] < newInterval[0]:
-#                 result.append(i)
-#             elif newInterval[1] < i[0]:
-#                 result.append(newInterval)
-#                 newInterval = i
-#             else:
-#                 newInterval[0] = min(i[0], newInterval[0])
-#                 newInterval[1] = max(i[1], newInterval[1])
+                newInterval = [min(interval[0],newInterval[0]), max(newInterval[1], interval[1])]
+        answer.append(newInterval)
                 
-#         result.append(newInterval)
-#         return result
-        
+        return answer
