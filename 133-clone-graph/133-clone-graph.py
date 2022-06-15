@@ -8,24 +8,17 @@ class Node:
 
 class Solution:
     def cloneGraph(self, node: 'Node') -> 'Node':
-        lookup = {}
         if not node:
             return None
+        lookup = {}
         
-        def exploreAndCreate(node):
+        def dfs(node):
             if node in lookup:
                 return lookup[node]
             newNode = Node(node.val)
             lookup[node] = newNode
-            for child in node.neighbors:
-                newNode.neighbors.append(exploreAndCreate(child))
+            for n in node.neighbors:
+                newNode.neighbors.append(dfs(n))
             return newNode
-            
-        return exploreAndCreate(node)
-    
-    
-            
-      
-        
-      
+        return dfs(node)
         
