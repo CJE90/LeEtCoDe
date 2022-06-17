@@ -8,8 +8,7 @@ class Node:
 
 class Solution:
     def cloneGraph(self, node: 'Node') -> 'Node':
-        if not node:
-            return None
+        if not node: return None
         lookup = {}
         
         def dfs(node):
@@ -17,8 +16,8 @@ class Solution:
                 return lookup[node]
             newNode = Node(node.val)
             lookup[node] = newNode
-            for n in node.neighbors:
-                newNode.neighbors.append(dfs(n))
+            for neighbor in node.neighbors:
+                newNode.neighbors.append(dfs(neighbor))
             return newNode
         return dfs(node)
         
