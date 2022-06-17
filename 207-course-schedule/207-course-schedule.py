@@ -1,31 +1,31 @@
 class Solution:
     def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
-        adjList = defaultdict(list)
-        visited = set()
         visiting = set()
-        for course,preReq in prerequisites:
-            adjList[course].append(preReq)
-            
-        def explore(node):
+        visited = set()
+        adj_list = defaultdict(list)
+        for course, pre_req in prerequisites:
+            adj_list[course].append(pre_req)
+        
+        
+        def dfs(node):
             if node in visiting:
                 return False
-            if node not in adjList:
+            if node not in adj_list:
                 return True
             visiting.add(node)
-            
-            for preReq in adjList[node]:
-                if not explore(preReq):
+            for neighbors in adj_list[node]:
+                if not dfs(neighbors):
                     return False
-            visited.add(node)
             visiting.remove(node)
-            adjList[node] = []
+            visited.add(node)
+            adj_list[node] = []
             return True
-        
         
         for i in range(numCourses):
             if i not in visited:
-                if not explore(i):
+                if not dfs(i):
                     return False
         return True
+        
         
         
