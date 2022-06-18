@@ -3,6 +3,7 @@ class Solution:
         adj_list = collections.defaultdict(list)
         for course, pre_req in prerequisites:
             adj_list[pre_req].append(course)
+        
         visited = set()
         visiting = set()
         def explore(node):
@@ -18,8 +19,9 @@ class Solution:
             return True
         
         for n in range(numCourses):
-            if not explore(n):
-                return False
+            if n not in visited:
+                if not explore(n):
+                    return False
         return True
             
 #         visited = set()
