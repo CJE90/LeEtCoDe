@@ -1,31 +1,25 @@
 class Solution:
     def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
-        visiting = set()
+        adj_list = collections.defaultdict(list)
         visited = set()
-        adj_list = defaultdict(list)
         for course, pre_req in prerequisites:
-            adj_list[course].append(pre_req)
-        
-        
-        def dfs(node):
-            if node in visiting:
+            adj_list[pre_req].append(course)
+            
+        def cycle(node, tracker, visited):
+            if node in visited:
                 return False
-            if node not in adj_list:
-                return True
-            visiting.add(node)
-            for neighbors in adj_list[node]:
-                if not dfs(neighbors):
-                    return False
-            visiting.remove(node)
+            tracker[node] = True
+            for n in adj_list[node]:
+                if n in tracker or cycle(n, tracker, visited):
+                    return True
+            del tracker[node]
             visited.add(node)
-            adj_list[node] = []
-            return True
+            return False
+           
         
         for i in range(numCourses):
-            if i not in visited:
-                if not dfs(i):
-                    return False
+            tracker = {}
+            if cycle(i, tracker, visited):
+                return False
         return True
-        
-        
         
