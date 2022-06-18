@@ -6,20 +6,21 @@ class Solution:
             adj_list[pre_req].append(course)
             
         def cycle(node, tracker, visited):
-            if node in visited:
-                return False
+            visited.add(node)
             tracker[node] = True
             for n in adj_list[node]:
-                if n in tracker or cycle(n, tracker, visited):
+                if n not in visited and cycle(n, tracker, visited):
+                    return True
+                elif n in tracker:
                     return True
             del tracker[node]
-            visited.add(node)
+            
             return False
            
         
         for i in range(numCourses):
             tracker = {}
-            if cycle(i, tracker, visited):
+            if i not in visited and cycle(i, tracker, visited):
                 return False
         return True
         
