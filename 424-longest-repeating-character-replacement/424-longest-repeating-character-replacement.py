@@ -1,17 +1,17 @@
 class Solution:
     def characterReplacement(self, s: str, k: int) -> int:
+        left = 0
+        max_window = 0
+        max_char = 0
         lookup = defaultdict(int)
-        l = 0
-        maxLength = 0
-        mostFrequent = ''
-        for r in range(len(s)):
-            lookup[s[r]] += 1
-            mostFrequent = max(lookup.values())
-            while r-l+1-mostFrequent > k:
-                lookup[s[l]] -= 1
-                if lookup[s[l]] < 1:
-                    lookup.pop(s[l])
-                l +=1
-            maxLength = max(maxLength, r-l+1)
-        return maxLength
+        for right in range(len(s)):
+            lookup[s[right]] += 1
+            max_char = max(max_char, lookup[s[right]])
+            if (right-left+1 - max_char) > k:
+                lookup[s[left]] -= 1
+                if lookup[s[left]] < 1:
+                    del lookup[s[left]]
+                left += 1
+            max_window = max(max_window, right-left+1)
+        return max_window
         
