@@ -1,26 +1,21 @@
 class Solution:
     def checkInclusion(self, s1: str, s2: str) -> bool:
-        window_start, matched = 0, 0
-        char_frequency = {}
-        
-        for chr in s1:
-            if chr not in char_frequency:
-                char_frequency[chr] = 0
-            char_frequency[chr] += 1
-            
-        for window_end in range(len(s2)):
-            right_char = s2[window_end]
-            if right_char in char_frequency:
-                char_frequency[right_char] -= 1
-                if char_frequency[right_char] == 0:
-                    matched += 1
-            if matched == len(char_frequency):
+        if len(s1) > len(s2):
+            return False
+        left = 0
+        lookup = Counter(s1)
+        need_to_match = 0        
+        for right in range(len(s2)):
+            if s2[right] in lookup:
+                lookup[s2[right]] -= 1
+                if lookup[s2[right]] == 0:
+                    need_to_match += 1
+            if need_to_match == len(lookup):
                 return True
-            if window_end >= len(s1) - 1:
-                left_char = s2[window_start]
-                window_start += 1
-                if left_char in char_frequency:
-                    if char_frequency[left_char] == 0:
-                        matched -= 1
-                    char_frequency[left_char] += 1
+            if right >= len(s1)-1:
+                if s2[left] in lookup:                    
+                    if lookup[s2[left]] == 0:
+                        need_to_match -= 1
+                    lookup[s2[left]] += 1
+                left += 1
         return False
