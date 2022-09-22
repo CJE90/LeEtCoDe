@@ -3,19 +3,22 @@ class Solution:
         if len(s1) > len(s2):
             return False
         left = 0
+        match_chars = 0
         lookup = Counter(s1)
-        need_to_match = 0        
         for right in range(len(s2)):
-            if s2[right] in lookup:
-                lookup[s2[right]] -= 1
-                if lookup[s2[right]] == 0:
-                    need_to_match += 1
-            if need_to_match == len(lookup):
+            right_char = s2[right]
+            if right_char in lookup:
+                lookup[right_char] -= 1
+                if lookup[right_char] == 0:
+                    match_chars += 1
+            if match_chars == len(lookup):
                 return True
             if right >= len(s1)-1:
-                if s2[left] in lookup:                    
-                    if lookup[s2[left]] == 0:
-                        need_to_match -= 1
-                    lookup[s2[left]] += 1
+                left_char = s2[left]
+                if left_char in lookup:
+                    if lookup[left_char] == 0:
+                        match_chars -= 1
+                    lookup[left_char] += 1
                 left += 1
         return False
+        
