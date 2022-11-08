@@ -4,15 +4,13 @@ class Solution:
             return s
         stack = []
         answer = ""
-        uppers = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-        lowers = 'abcdefghijklmnopqrstuvwxyz'
+        #uppers = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+        #lowers = 'abcdefghijklmnopqrstuvwxyz'
         for i in range(len(s)):
             if len(stack) == 0:
                 stack.append(s[i])
                 continue
-            if s[i] in uppers and stack[-1] in lowers and stack[-1].upper() == s[i]:
-                stack.pop()
-            elif s[i] in lowers and stack[-1] in uppers and stack[-1].lower() == s[i]:
+            elif ord(s[i])-32 == ord(stack[-1]) or ord(stack[-1])-32 == ord(s[i]):
                 stack.pop()
             else:
                 stack.append(s[i])
