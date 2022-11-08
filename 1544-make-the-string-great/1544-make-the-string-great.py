@@ -3,9 +3,6 @@ class Solution:
         if len(s) < 2:
             return s
         stack = []
-        answer = ""
-        #uppers = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-        #lowers = 'abcdefghijklmnopqrstuvwxyz'
         for i in range(len(s)):
             if len(stack) == 0:
                 stack.append(s[i])
@@ -15,8 +12,8 @@ class Solution:
             else:
                 stack.append(s[i])
         
-        answer = "".join(stack)
-        return answer
+        return "".join(stack)
+        
         
         
         
