@@ -44,21 +44,14 @@
 class Solution:
     def depthSum(self, nestedList: List[NestedInteger]) -> int:
         
-        answer = 0
-        for i in range(len(nestedList)):
-            if nestedList[i].isInteger():
-                answer += nestedList[i].getInteger()
-            else:
-                answer += self.helper(2, nestedList[i].getList())
-        return answer
+        return self.helper(nestedList, 1)
         
-    def helper(self, depth, nestedList):
+    def helper(self, sublist, depth):
         answer = 0
-        for i in range(len(nestedList)):
-            item = nestedList[i]
-            if item.isInteger():
-                answer += item.getInteger() * depth
+        for l in sublist:
+            if l.isInteger():
+                answer += l.getInteger() * depth
             else:
-                answer += self.helper(depth+1, item.getList())
+                answer += self.helper(l.getList(), depth + 1)
         return answer
         
